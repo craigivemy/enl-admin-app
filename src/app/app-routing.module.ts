@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {TeamComponent} from './shared/components/teams/team/team.component';
-import {AppComponent} from './app.component';
+import {HomeComponent} from './home/home.component';
+import {TeamsComponent} from './shared/components/teams/teams.component';
 
 const routes: Routes = [
   {
-    path: '',
-    // homecomponent not appcoponent
-    component: AppComponent
+    path: 'dashboard',
+    component: HomeComponent
   },
   {
     path: 'teams',
-    component: TeamComponent // this should be teams view not Team individual component or at least plural
+    component: TeamsComponent // this should be teams view not Team individual component or at least plural
   }
 ];
 
