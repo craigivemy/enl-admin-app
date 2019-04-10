@@ -136,5 +136,8 @@
       }
     }
   },
-  "defaultProject": "enl-admin-app"
+  "defaultProject": "enl-admin-app",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
