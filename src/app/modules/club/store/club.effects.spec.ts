@@ -2,21 +2,21 @@ import { TestBed, inject } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
-import { TeamsEffects } from './teams.effects';
+import { ClubEffects } from './club.effects';
 
-describe('TeamsEffects', () => {
+describe('ClubEffects', () => {
   let actions$: Observable<any>;
-  let effects: TeamsEffects;
+  let effects: ClubEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        TeamsEffects,
+        ClubEffects,
         provideMockActions(() => actions$)
       ]
     });
 
-    effects = TestBed.get(TeamsEffects);
+    effects = TestBed.get(ClubEffects);
   });
 
   it('should be created', () => {

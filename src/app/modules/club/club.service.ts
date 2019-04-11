@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {Team} from '../models/team.model';
+import {Team} from '../../shared/models/team.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TeamsService {
+export class ClubService {
 
   constructor(http: HttpClient) { }
 

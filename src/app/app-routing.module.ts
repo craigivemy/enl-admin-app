@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {HomeComponent} from './home/home.component';
-import {TeamsComponent} from './shared/components/teams/teams.component';
+import {HomeComponent} from './modules/home/home.component';
+import {TeamComponent} from './modules/club/components/team/team.component';
 
 const routes: Routes = [
   {
@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'teams',
-    component: TeamsComponent // this should be teams view not Team individual component or at least plural
+    component: TeamComponent // this should be teams view not Team individual component or at least plural
   }
 ];
 

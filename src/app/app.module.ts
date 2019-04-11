@@ -8,16 +8,15 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { ClubComponent } from './shared/components/clubs/club/club.component';
-import { TeamComponent } from './shared/components/teams/team/team.component';
+import { ClubComponent } from './modules/club/components/club/club.component';
 import {AppMaterialModule} from './app-material.module';
-import { HomeComponent } from './home/home.component';
-import { TeamsComponent } from './shared/components/teams/teams.component';
+import { HomeComponent } from './modules/home/home.component';
+import { TeamComponent } from './modules/club/components/team/team.component';
 import {StoreRouterConnectingModule} from '@ngrx/router-store';
 import {CustomSerializer} from './shared/utils';
 import {EffectsModule} from '@ngrx/effects';
-import {teamsReducer} from './store/teams/teams.reducer';
-import {TeamsEffects} from './store/teams/teams.effects';
+import {clubReducer} from './modules/club/store/club.reducer';
+import {ClubEffects} from './modules/club/store/club.effects';
 import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
@@ -25,8 +24,7 @@ import {HttpClientModule} from '@angular/common/http';
         AppComponent,
         ClubComponent,
         TeamComponent,
-        HomeComponent,
-        TeamsComponent
+        HomeComponent
     ],
     imports: [
         BrowserModule,
@@ -38,9 +36,9 @@ import {HttpClientModule} from '@angular/common/http';
         StoreRouterConnectingModule.forRoot({
             serializer: CustomSerializer
         }),
-        StoreModule.forFeature('teams', teamsReducer),
+        StoreModule.forFeature('teams', clubReducer),
         EffectsModule.forRoot([]),
-        EffectsModule.forFeature([TeamsEffects]),
+        EffectsModule.forFeature([ClubEffects]),
         !environment.production ? StoreDevtoolsModule.instrument() : []
     ],
     providers: [],

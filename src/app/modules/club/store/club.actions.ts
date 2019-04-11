@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import {Team} from '../../shared/models/team.model';
+import {Team} from '../../../shared/models/team.model';
 
 export enum TeamsActionTypes {
   AllTeamsRequested = '[All Teams Page] All Teams Requested',
@@ -15,5 +15,5 @@ export class AllTeamsLoaded implements Action {
 }
 
 
-export type TeamsActions = AllTeamsRequested
+export type ClubActions = AllTeamsRequested
   | AllTeamsLoaded;

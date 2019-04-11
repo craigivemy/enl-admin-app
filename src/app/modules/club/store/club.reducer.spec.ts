@@ -1,4 +1,4 @@
-import { reducer, initialState } from './teams.reducer';
+import { reducer, initialState } from './club.reducer';
 
 describe('Teams Reducer', () => {
   describe('an unknown action', () => {

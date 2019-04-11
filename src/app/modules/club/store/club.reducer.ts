@@ -1,8 +1,8 @@
 import { Action } from '@ngrx/store';
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
-import {Team} from '../../shared/models/team.model';
-import {AppState} from '../../reducers';
-import {TeamsActions, TeamsActionTypes} from './teams.actions';
+import {Team} from '../../../shared/models/team.model';
+import {AppState} from '../../../reducers';
+import {ClubActions, TeamsActionTypes} from './club.actions';
 
 export interface TeamsState extends EntityState<Team> {
     allTeamsLoaded: boolean;
@@ -14,7 +14,7 @@ export const initialTeamsState: TeamsState = adapter.getInitialState({
     allTeamsLoaded: false
 });
 
-export function teamsReducer(state = initialTeamsState, action: TeamsActions): TeamsState {
+export function clubReducer(state = initialTeamsState, action: ClubActions): TeamsState {
     switch (action.type) {
         case TeamsActionTypes.AllTeamsLoaded:
             return adapter.addAll(action.payload.teams, {...state, allTeamsLoaded: true });
