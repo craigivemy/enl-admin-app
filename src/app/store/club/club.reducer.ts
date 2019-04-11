@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import {Team} from '../../shared/models/team.model';
-import {AppState} from '../../reducers';
+import {AppState} from '../index';
 import {ClubActions, TeamsActionTypes} from './club.actions';
 
 export interface TeamsState extends EntityState<Team> {

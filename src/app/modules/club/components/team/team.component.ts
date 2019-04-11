@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {select, Store} from '@ngrx/store';
-import {AppState} from '../../../../reducers';
+import {AppState} from '../../../../store';
 import {AllTeamsRequested} from '../../../../store/club/club.actions';
 import {Observable} from 'rxjs';
 import {Team} from '../../../../shared/models/team.model';

@@ -5,25 +5,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
+import { reducers, metaReducers } from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { ClubComponent } from './modules/club/components/club/club.component';
 import {AppMaterialModule} from './app-material.module';
 import { HomeComponent } from './modules/home/home.component';
-import { TeamComponent } from './modules/club/components/team/team.component';
 import {StoreRouterConnectingModule} from '@ngrx/router-store';
 import {CustomSerializer} from './shared/utils';
 import {EffectsModule} from '@ngrx/effects';
-import {clubReducer} from './store/club/club.reducer';
-import {ClubEffects} from './store/club/club.effects';
 import {HttpClientModule} from '@angular/common/http';
+import {ClubModule} from './modules/club/club.module';
 
 @NgModule({
     declarations: [
         AppComponent,
-        ClubComponent,
-        TeamComponent,
         HomeComponent
     ],
     imports: [
@@ -32,13 +27,12 @@ import {HttpClientModule} from '@angular/common/http';
         BrowserAnimationsModule,
         AppMaterialModule,
         HttpClientModule,
+        ClubModule,
         StoreModule.forRoot(reducers, { metaReducers }),
         StoreRouterConnectingModule.forRoot({
             serializer: CustomSerializer
         }),
-        StoreModule.forFeature('teams', clubReducer),
         EffectsModule.forRoot([]),
-        EffectsModule.forFeature([ClubEffects]),
         !environment.production ? StoreDevtoolsModule.instrument() : []
     ],
     providers: [],
