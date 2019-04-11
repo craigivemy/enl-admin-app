@@ -15,8 +15,8 @@ import { TeamComponent } from './modules/club/components/team/team.component';
 import {StoreRouterConnectingModule} from '@ngrx/router-store';
 import {CustomSerializer} from './shared/utils';
 import {EffectsModule} from '@ngrx/effects';
-import {clubReducer} from './modules/club/store/club.reducer';
-import {ClubEffects} from './modules/club/store/club.effects';
+import {clubReducer} from './store/club/club.reducer';
+import {ClubEffects} from './store/club/club.effects';
 import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({

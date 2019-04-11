@@ -3,8 +3,8 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import {AllTeamsLoaded, AllTeamsRequested, TeamsActionTypes} from './club.actions';
 import {filter, map, mergeMap, tap, withLatestFrom} from 'rxjs/operators';
 import {select, Store} from '@ngrx/store';
-import {AppState} from '../../../reducers';
-import {ClubService} from '../club.service';
+import {AppState} from '../../reducers';
+import {ClubService} from '../../modules/club/club.service';
 import {selectAllTeams, selectAllTeamsLoaded} from './club.selectors';
 
 

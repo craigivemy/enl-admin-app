@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../../../reducers';
-import {AllTeamsRequested} from '../../store/club.actions';
+import {AllTeamsRequested} from '../../../../store/club/club.actions';
 import {Observable} from 'rxjs';
 import {Team} from '../../../../shared/models/team.model';
-import {selectAllTeams} from '../../store/club.selectors';
+import {selectAllTeams} from '../../../../store/club/club.selectors';
 
 @Component({
   selector: 'app-teams',
