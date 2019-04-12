@@ -14,7 +14,7 @@ import {AppMaterialModule} from '../../app-material.module';
         CommonModule,
         AppMaterialModule,
         StoreModule.forFeature('teams', clubReducer),
-        EffectsModule.forFeature([ClubEffects]),
+        EffectsModule.forFeature([ClubEffects])
     ]
 })
 export class ClubModule { }
