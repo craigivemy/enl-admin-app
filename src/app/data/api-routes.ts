@@ -1,3 +1,7 @@
 export enum ApiRoutes {
-    Teams = '/teams'
+    Teams = '/teams',
+    Clubs = '/clubs',
+    Umpires = '/umpires',
+    Seasons = '/seasons',
+    Matches = '/matches'
 }

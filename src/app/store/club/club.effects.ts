@@ -18,7 +18,7 @@ export class ClubEffects {
             ofType<AllTeamsRequested>(TeamsActionTypes.AllTeamsRequested),
             withLatestFrom(this.store.pipe(select(selectAllTeamsLoaded))),
             filter(([action, allTeamsLoaded]) => !allTeamsLoaded),
-            mergeMap(() => this.teamsService.getAllTeams()),
+            mergeMap(() => this.teamsService.getTeams()),
             map(teams => new AllTeamsLoaded({ teams }))
         );
 
