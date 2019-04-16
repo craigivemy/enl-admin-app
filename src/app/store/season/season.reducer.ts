@@ -1,21 +1,21 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { Season } from './season.model';
+import {Season} from '../../shared/models/season.model';
 import { SeasonActions, SeasonActionTypes } from './season.actions';
 
-export interface State extends EntityState<Season> {
-  // additional entities state properties
+export interface SeasonsState extends EntityState<Season> {
+  allSeasonsLoaded: boolean;
 }
 
 export const adapter: EntityAdapter<Season> = createEntityAdapter<Season>();
 
-export const initialState: State = adapter.getInitialState({
-  // additional entity state properties
+export const initialSeasonsState: SeasonsState = adapter.getInitialState({
+  allSeasonsLoaded: false
 });
 
 export function seasonReducer(
-  state = initialState,
+  state = initialSeasonsState,
   action: SeasonActions
-): State {
+): SeasonsState {
   switch (action.type) {
     case SeasonActionTypes.AddSeason: {
       return adapter.addOne(action.payload.season, state);
@@ -49,8 +49,8 @@ export function seasonReducer(
       return adapter.removeMany(action.payload.ids, state);
     }
 
-    case SeasonActionTypes.LoadSeasons: {
-      return adapter.addAll(action.payload.seasons, state);
+    case SeasonActionTypes.AllSeasonsLoaded: {
+      return adapter.addAll(action.payload.seasons, {...state, allSeasonsLoaded: true });
     }
 
     case SeasonActionTypes.ClearSeasons: {

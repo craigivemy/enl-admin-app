@@ -15,11 +15,16 @@ import {CustomSerializer} from './shared/utils';
 import {EffectsModule} from '@ngrx/effects';
 import {HttpClientModule} from '@angular/common/http';
 import {ClubModule} from './modules/club/club.module';
+import { SeasonSelectorComponent } from './shared/components/season-selector/season-selector.component';
+import {MatInputModule, MatOptionModule, MatSelectModule} from '@angular/material';
+import {SeasonEffects} from './store/season/season.effects';
+import {seasonReducer} from './store/season/season.reducer';
 
 @NgModule({
     declarations: [
         AppComponent,
-        HomeComponent
+        HomeComponent,
+        SeasonSelectorComponent
     ],
     imports: [
         BrowserModule,
@@ -28,12 +33,16 @@ import {ClubModule} from './modules/club/club.module';
         AppMaterialModule,
         HttpClientModule,
         ClubModule,
-        StoreModule.forRoot(reducers, { metaReducers }),
+        StoreModule.forRoot(reducers, {metaReducers}),
         StoreRouterConnectingModule.forRoot({
             serializer: CustomSerializer
         }),
-        EffectsModule.forRoot([]),
-        !environment.production ? StoreDevtoolsModule.instrument() : []
+        StoreModule.forFeature('seasons', seasonReducer),
+        EffectsModule.forRoot([SeasonEffects]),
+        !environment.production ? StoreDevtoolsModule.instrument() : [],
+        MatInputModule,
+        MatOptionModule,
+        MatSelectModule
     ],
     providers: [],
     bootstrap: [AppComponent]

@@ -16,7 +16,7 @@ export class ClubService {
     getTeams(): Observable<Team[]> {
       return this.http.get<Team[]>(this.teamsApiUrl)
           .pipe(
-              map(teams => Object.values(teams["data"]))
+              map(teams => teams["data"])
           );
   }
 
