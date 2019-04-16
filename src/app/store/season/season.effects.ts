@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {Store} from '@ngrx/store';
 import {AppState} from '../index';
-import {AllSeasonsLoaded, SeasonActionTypes} from './season.actions';
-import {AllTeamsRequested} from '../club/club.actions';
+import {AllSeasonsLoaded, AllSeasonsRequested, SeasonActionTypes} from './season.actions';
 import {filter, map, mergeMap, withLatestFrom} from 'rxjs/operators';
-import {selectAllSeasons} from './season.selectors';
+import {selectAllSeasonsLoaded} from './season.selectors';
 import {select} from '@ngrx/store';
 import {SeasonService} from '../../modules/season/season.service';
 
@@ -15,13 +14,13 @@ import {SeasonService} from '../../modules/season/season.service';
 export class SeasonEffects {
 
   @Effect()
-  loadAllSeasons$ = this.store
+  loadAllSeasons$ = this.actions$
       .pipe(
-          ofType<AllTeamsRequested>(SeasonActionTypes.AllSeasonsRequested),
-          withLatestFrom(this.store.pipe(select(selectAllSeasons))),
+          ofType<AllSeasonsRequested>(SeasonActionTypes.AllSeasonsRequested),
+          withLatestFrom(this.store.pipe(select(selectAllSeasonsLoaded))),
           filter(([action, allSeasonsLoaded]) => !allSeasonsLoaded),
           mergeMap(() => this.seasonService.getSeasons()),
-          map((seasons) => this.store.dispatch(new AllSeasonsLoaded({seasons})))
+          map(seasons => new AllSeasonsLoaded({seasons}))
       );
 
   constructor(

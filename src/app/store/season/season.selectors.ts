@@ -9,3 +9,8 @@ export const selectAllSeasons = createSelector(
     selectSeasonsState,
     fromSeasons.selectAll
 );
+
+export const selectAllSeasonsLoaded = createSelector(
+    selectSeasonsState,
+    seasonsState => seasonsState.allSeasonsLoaded
+);
