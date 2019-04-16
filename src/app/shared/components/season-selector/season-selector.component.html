@@ -1,0 +1,6 @@
+<mat-form-field>
+  <mat-select>
+    <mat-label>Select Season</mat-label>
+    <mat-option *ngFor="let season of seasons$ | async">{{ season.name }}</mat-option>
+  </mat-select>
+</mat-form-field>
