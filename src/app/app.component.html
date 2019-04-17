@@ -1,5 +1,5 @@
 <mat-sidenav-container fullscreen>
-  <mat-sidenav #appSidebar>
+  <mat-sidenav #appSidebar mode="side">
     <mat-nav-list>
       <a mat-list-item routerLink="dashboard">Home</a>
     </mat-nav-list>
@@ -8,7 +8,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-toolbar color="primary">
-    <button mat-icon-button (click)="appSidebar.open()">Menu</button>
+    <button mat-icon-button (click)="appSidebar.toggle()">Menu</button>
     <app-season-selector class="ml-auto"></app-season-selector>
   </mat-toolbar>
 
