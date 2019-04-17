@@ -1,6 +1,6 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
-import {TeamsState} from './club.reducer';
-import * as fromTeams from './club.reducer';
+import {TeamsState} from './team.reducer';
+import * as fromTeams from './team.reducer';
 
 export const selectTeamsState = createFeatureSelector<TeamsState>('teams');
 

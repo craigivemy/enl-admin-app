@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {AllTeamsLoaded, AllTeamsRequested, TeamsActionTypes} from './club.actions';
+import {AllTeamsLoaded, AllTeamsRequested, TeamsActionTypes} from './team.actions';
 import {filter, map, mergeMap, tap, withLatestFrom} from 'rxjs/operators';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../index';
-import {ClubService} from '../../modules/club/club.service';
-import {selectAllTeams, selectAllTeamsLoaded} from './club.selectors';
+import {TeamService} from '../../modules/club-team/team.service';
+import {selectAllTeams, selectAllTeamsLoaded} from './team.selectors';
 
 
 
 @Injectable()
-export class ClubEffects {
+export class TeamEffects {
 
     @Effect()
     loadAllTeams$ = this.actions$
@@ -25,7 +25,7 @@ export class ClubEffects {
     constructor(
         private actions$: Actions,
         private store: Store<AppState>,
-        private teamsService: ClubService
+        private teamsService: TeamService
     ) {}
 
 }

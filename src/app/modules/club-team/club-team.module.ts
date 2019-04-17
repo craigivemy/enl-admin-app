@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { TeamComponent } from './components/team/team.component';
 import {ClubComponent} from './components/club/club.component';
 import {StoreModule} from '@ngrx/store';
-import {clubReducer} from '../../store/club/club.reducer';
+import {teamReducer} from '../../store/team/team.reducer';
 import {EffectsModule} from '@ngrx/effects';
-import {ClubEffects} from '../../store/club/club.effects';
+import {TeamEffects} from '../../store/team/team.effects';
 import {AppMaterialModule} from '../../app-material.module';
 
 @NgModule({
@@ -13,8 +13,8 @@ import {AppMaterialModule} from '../../app-material.module';
     imports: [
         CommonModule,
         AppMaterialModule,
-        StoreModule.forFeature('teams', clubReducer),
-        EffectsModule.forFeature([ClubEffects])
+        StoreModule.forFeature('teams', teamReducer),
+        EffectsModule.forFeature([TeamEffects])
     ]
 })
-export class ClubModule { }
+export class ClubTeamModule { }

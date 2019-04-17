@@ -15,5 +15,5 @@ export class AllTeamsLoaded implements Action {
 }
 
 
-export type ClubActions = AllTeamsRequested
+export type TeamActions = AllTeamsRequested
   | AllTeamsLoaded;

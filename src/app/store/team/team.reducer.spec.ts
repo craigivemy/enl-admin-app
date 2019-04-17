@@ -1,13 +1,13 @@
-import { reducer, initialState } from './club.reducer';
+import {teamReducer, initialTeamsState} from './team.reducer';
 
 describe('Teams Reducer', () => {
   describe('an unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as any;
 
-      const result = reducer(initialState, action);
+      const result = teamReducer(initialTeamsState, action);
 
-      expect(result).toBe(initialState);
+      expect(result).toBe(initialTeamsState);
     });
   });
 });

@@ -14,7 +14,7 @@ import {StoreRouterConnectingModule} from '@ngrx/router-store';
 import {CustomSerializer} from './shared/utils';
 import {EffectsModule} from '@ngrx/effects';
 import {HttpClientModule} from '@angular/common/http';
-import {ClubModule} from './modules/club/club.module';
+import {ClubTeamModule} from './modules/club-team/club-team.module';
 import { SeasonSelectorComponent } from './shared/components/season-selector/season-selector.component';
 import {MatInputModule, MatOptionModule, MatSelectModule} from '@angular/material';
 import {SeasonEffects} from './store/season/season.effects';
@@ -32,7 +32,7 @@ import {seasonReducer} from './store/season/season.reducer';
         BrowserAnimationsModule,
         AppMaterialModule,
         HttpClientModule,
-        ClubModule,
+        ClubTeamModule,
         StoreModule.forRoot(reducers, {metaReducers}),
         StoreRouterConnectingModule.forRoot({
             serializer: CustomSerializer
