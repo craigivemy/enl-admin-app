@@ -19,12 +19,12 @@ import { SeasonSelectorComponent } from './shared/components/season-selector/sea
 import {MatInputModule, MatOptionModule, MatSelectModule} from '@angular/material';
 import {SeasonEffects} from './store/season/season.effects';
 import {seasonReducer} from './store/season/season.reducer';
+import {FixtureModule} from './modules/fixture/fixture.module';
 
 @NgModule({
     declarations: [
         AppComponent,
-        HomeComponent,
-        SeasonSelectorComponent
+        HomeComponent
     ],
     imports: [
         BrowserModule,
@@ -33,6 +33,7 @@ import {seasonReducer} from './store/season/season.reducer';
         AppMaterialModule,
         HttpClientModule,
         ClubTeamModule,
+        FixtureModule,
         StoreModule.forRoot(reducers, {metaReducers}),
         StoreRouterConnectingModule.forRoot({
             serializer: CustomSerializer

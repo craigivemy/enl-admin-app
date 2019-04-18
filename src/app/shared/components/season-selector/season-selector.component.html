@@ -1,6 +1,6 @@
 <mat-form-field>
-  <mat-label>Select Season</mat-label>
-  <mat-select>
-    <mat-option *ngFor="let season of seasons$ | async" [value]="season.id">{{ season.name }}</mat-option>
-  </mat-select>
+    <mat-label>Select Season</mat-label>
+    <mat-select>
+        <mat-option *ngFor="let season of seasons$ | async" [value]="season.id">{{ season.name }}</mat-option>
+    </mat-select>
 </mat-form-field>

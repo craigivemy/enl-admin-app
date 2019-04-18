@@ -11,13 +11,16 @@ import {MatButtonModule, MatInputModule, MatListModule, MatSelectModule, MatSide
         MatToolbarModule,
         MatSidenavModule,
         MatListModule,
-        MatSelectModule
+        MatSelectModule,
     ],
     exports: [
+        CommonModule,
+        MatInputModule,
         MatButtonModule,
         MatToolbarModule,
         MatSidenavModule,
-        MatListModule
+        MatListModule,
+        MatSelectModule // todo - should imports and exports really be the same here?
     ]
 })
 export class AppMaterialModule { }
