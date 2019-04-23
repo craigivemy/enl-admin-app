@@ -20,11 +20,13 @@ import {MatInputModule, MatOptionModule, MatSelectModule} from '@angular/materia
 import {SeasonEffects} from './store/season/season.effects';
 import {seasonReducer} from './store/season/season.reducer';
 import {FixtureModule} from './modules/fixture/fixture.module';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
     declarations: [
         AppComponent,
-        HomeComponent
+        HomeComponent,
+        SeasonSelectorComponent
     ],
     imports: [
         BrowserModule,
@@ -34,6 +36,7 @@ import {FixtureModule} from './modules/fixture/fixture.module';
         HttpClientModule,
         ClubTeamModule,
         FixtureModule,
+        ReactiveFormsModule,
         StoreModule.forRoot(reducers, {metaReducers}),
         StoreRouterConnectingModule.forRoot({
             serializer: CustomSerializer
