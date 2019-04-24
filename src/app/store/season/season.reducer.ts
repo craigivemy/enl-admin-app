@@ -4,6 +4,7 @@ import { SeasonActions, SeasonActionTypes } from './season.actions';
 
 export interface SeasonsState extends EntityState<Season> {
   allSeasonsLoaded: boolean;
+  currentlySelectedSeason?: number;
 }
 
 export const adapter: EntityAdapter<Season> = createEntityAdapter<Season>();
@@ -48,7 +49,6 @@ export function seasonReducer(
     // case SeasonActionTypes.DeleteSeasons: {
     //   return adapter.removeMany(action.payload.ids, state);
     // }
-
     case SeasonActionTypes.AllSeasonsLoaded: {
       return adapter.addAll(action.payload.seasons, {...state, allSeasonsLoaded: true });
     }

@@ -12,7 +12,6 @@ import {SeasonService} from '../../modules/season/season.service';
 
 @Injectable()
 export class SeasonEffects {
-
   @Effect()
   loadAllSeasons$ = this.actions$
       .pipe(
