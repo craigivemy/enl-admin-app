@@ -3,15 +3,18 @@ import {Season} from '../../shared/models/season.model';
 import {SeasonActions, SeasonActionTypes} from './season.actions';
 import {isLowerCase} from 'tslint/lib/utils';
 
+type SelectedSeasonProperty = number | boolean;
+
 export interface SeasonsState extends EntityState<Season> {
   allSeasonsLoaded: boolean;
-  currentlySelectedSeason?: number;
+  currentlySelectedSeason: SelectedSeasonProperty;
 }
 
 export const adapter: EntityAdapter<Season> = createEntityAdapter<Season>();
 
 export const initialSeasonsState: SeasonsState = adapter.getInitialState({
-  allSeasonsLoaded: false
+  allSeasonsLoaded: false,
+  currentlySelectedSeason: false
 });
 
 export function seasonReducer(
