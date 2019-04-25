@@ -26,7 +26,11 @@ export const selectCurrentSeasonId = createSelector(
             );
             return currentSeason[0] ? currentSeason[0].id : 0;
     }
+);
 
+export const selectCurrentlySelectedSeason = createSelector(
+    selectSeasonsState,
+    seasonsState => seasonsState.currentlySelectedSeasonId
 );
 // necessary?
 // export const selectCurrentlySelectedSeason

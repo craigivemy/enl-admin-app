@@ -6,14 +6,14 @@ type SelectedSeasonProperty = number | boolean;
 
 export interface SeasonsState extends EntityState<Season> {
   allSeasonsLoaded: boolean;
-  currentlySelectedSeason: SelectedSeasonProperty;
+  currentlySelectedSeasonId: SelectedSeasonProperty;
 }
 
 export const adapter: EntityAdapter<Season> = createEntityAdapter<Season>();
 
 export const initialSeasonsState: SeasonsState = adapter.getInitialState({
   allSeasonsLoaded: false,
-  currentlySelectedSeason: false
+  currentlySelectedSeasonId: false
 });
 
 export function seasonReducer(
@@ -56,7 +56,7 @@ export function seasonReducer(
       return adapter.addAll(action.payload.seasons, {...state, allSeasonsLoaded: true });
     }
     case SeasonActionTypes.SelectedSeasonUpdated: {
-      return {...state, currentlySelectedSeason: action.payload.seasonId};
+      return {...state, currentlySelectedSeasonId: action.payload.seasonId};
     }
 
     // case SeasonActionTypes.ClearSeasons: {

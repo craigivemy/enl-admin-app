@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../../store';
-import {AllSeasonsRequested} from '../../../store/season/season.actions';
-import {Observable} from 'rxjs';
+import {AllSeasonsRequested, SelectedSeasonUpdated} from '../../../store/season/season.actions';
+import {Observable, pipe} from 'rxjs';
 import {Season} from '../../models/season.model';
 import {select} from '@ngrx/store';
 import {selectAllSeasons, selectCurrentSeasonId} from '../../../store/season/season.selectors';
@@ -33,8 +33,14 @@ export class SeasonSelectorComponent implements OnInit {
                 select(selectCurrentSeasonId)
             )
             .subscribe(seasonId => this.setInitialValue(seasonId));
+
+        this.seasonSelect.valueChanges
+            .subscribe(value => this.store.dispatch(new SelectedSeasonUpdated({seasonId: value})));
+
     }
+
     setInitialValue(value: number): void {
         this.seasonSelect.setValue(value);
     }
+
 }

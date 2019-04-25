@@ -34,7 +34,6 @@ export class SelectedSeasonUpdated implements Action {
 
 export class AddSeason implements Action {
     readonly type = SeasonActionTypes.AddSeason;
-
     constructor(public payload: { season: Season }) {}
 }
 
