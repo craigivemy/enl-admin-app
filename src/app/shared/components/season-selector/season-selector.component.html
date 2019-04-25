@@ -1,7 +1,6 @@
 <mat-form-field>
     <mat-label>Select Season</mat-label>
-    <mat-select [formControl]="seasonSelect" [value]="selected$ | async">
-        <mat-option *ngFor="let season of seasons$ | async" value="season.id">{{ season.name }}</mat-option>
+    <mat-select [formControl]="seasonSelect" [value]="(selected$ | async)?.id">
+        <mat-option *ngFor="let season of seasons$ | async" [value]="season.id">{{ season.name }}</mat-option>
     </mat-select>
 </mat-form-field>
-<h1>{{ selected$ | async }}</h1>

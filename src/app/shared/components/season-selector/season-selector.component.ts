@@ -7,10 +7,7 @@ import {Season} from '../../models/season.model';
 import {select} from '@ngrx/store';
 import {selectAllSeasons, selectCurrentSeason} from '../../../store/season/season.selectors';
 import {FormControl} from '@angular/forms';
-import {pipe} from 'rxjs/internal/util/pipe';
-import {tap} from 'rxjs/internal/operators/tap';
-import {first} from 'rxjs/internal/operators/first';
-import {map, take} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 @Component({
     selector: 'app-season-selector',
@@ -33,13 +30,12 @@ export class SeasonSelectorComponent implements OnInit {
         this.selected$ = this.store
             .pipe(
                 select(selectCurrentSeason),
-                take(1),
                 map(season => season[0])
             );
-        this.seasonSelect.valueChanges
-            .pipe(
-                // dispatch action
-                // store selector for currentlySelectedSeason?
-            ).subscribe(); // make this a subject?
+        // this.seasonSelect.valueChanges
+        //     .pipe(
+        //         // dispatch action
+        //         // store selector for currentlySelectedSeason?
+        //     ).subscribe(); // make this a subject?
     }
 }
