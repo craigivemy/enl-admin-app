@@ -1,7 +1,6 @@
 import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import {Season} from '../../shared/models/season.model';
 import {SeasonActions, SeasonActionTypes} from './season.actions';
-import {isLowerCase} from 'tslint/lib/utils';
 
 type SelectedSeasonProperty = number | boolean;
 
