@@ -1,6 +1,7 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 import {Season} from '../../shared/models/season.model';
-import { SeasonActions, SeasonActionTypes } from './season.actions';
+import {SeasonActions, SeasonActionTypes} from './season.actions';
+import {isLowerCase} from 'tslint/lib/utils';
 
 export interface SeasonsState extends EntityState<Season> {
   allSeasonsLoaded: boolean;
@@ -51,6 +52,9 @@ export function seasonReducer(
     // }
     case SeasonActionTypes.AllSeasonsLoaded: {
       return adapter.addAll(action.payload.seasons, {...state, allSeasonsLoaded: true });
+    }
+    case SeasonActionTypes.SelectedSeasonUpdated: {
+      return {...state, currentlySelectedSeason: action.payload.seasonId};
     }
 
     // case SeasonActionTypes.ClearSeasons: {

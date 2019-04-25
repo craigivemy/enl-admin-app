@@ -5,6 +5,7 @@ import {Season} from '../../shared/models/season.model';
 export enum SeasonActionTypes {
     AllSeasonsRequested = '[Seasons Selector Component] All Seasons Requested',
     AllSeasonsLoaded = '[Seasons API] All Seasons Loaded',
+    SelectedSeasonUpdated = '[Seasons Selector Component] Selected Season Updated',
     AddSeason = '[Season] Add Season',
     UpsertSeason = '[Season] Upsert Season',
     AddSeasons = '[Season] Add Seasons',
@@ -24,6 +25,11 @@ export class AllSeasonsLoaded implements Action {
     readonly type = SeasonActionTypes.AllSeasonsLoaded;
 
     constructor(public payload: { seasons: Season[] }) {}
+}
+
+export class SelectedSeasonUpdated implements Action {
+    readonly type = SeasonActionTypes.SelectedSeasonUpdated;
+    constructor(public payload: { seasonId: number }) {}
 }
 
 export class AddSeason implements Action {
@@ -81,6 +87,7 @@ export class ClearSeasons implements Action {
 export type SeasonActions =
     AllSeasonsRequested
     | AllSeasonsLoaded
+    | SelectedSeasonUpdated
     | AddSeason
     | UpsertSeason
     | AddSeasons

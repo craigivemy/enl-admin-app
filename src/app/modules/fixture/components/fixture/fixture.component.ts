@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../../../../store';
+import {selectCurrentSeasonId} from '../../../../store/season/season.selectors';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-fixture',
@@ -6,10 +10,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fixture.component.css']
 })
 export class FixtureComponent implements OnInit {
-
-  constructor() { }
+  test$: Observable<number>;
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
+    this.test$ = this.store
+        .pipe(
+            select(selectCurrentSeasonId)
+        );
   }
 
 }

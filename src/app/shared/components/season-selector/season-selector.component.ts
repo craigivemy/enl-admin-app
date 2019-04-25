@@ -5,9 +5,10 @@ import {AllSeasonsRequested} from '../../../store/season/season.actions';
 import {Observable} from 'rxjs';
 import {Season} from '../../models/season.model';
 import {select} from '@ngrx/store';
-import {selectAllSeasons, selectCurrentSeason} from '../../../store/season/season.selectors';
+import {selectAllSeasons, selectCurrentSeasonId} from '../../../store/season/season.selectors';
 import {FormControl} from '@angular/forms';
-import {map} from 'rxjs/operators';
+import {debounceTime, map} from 'rxjs/operators';
+import {tap} from 'rxjs/internal/operators/tap';
 
 @Component({
     selector: 'app-season-selector',
@@ -19,7 +20,7 @@ export class SeasonSelectorComponent implements OnInit {
     constructor(private store: Store<AppState>) { }
 
     seasons$: Observable<Season[]>;
-    selected$: Observable<Season>;
+    selected: any;
     seasonSelect = new FormControl('');
 
     ngOnInit() {
@@ -27,15 +28,13 @@ export class SeasonSelectorComponent implements OnInit {
         this.seasons$ = this.store.pipe(
             select(selectAllSeasons)
         );
-        this.selected$ = this.store
+        this.selected = this.store
             .pipe(
-                select(selectCurrentSeason),
-                map(season => season[0])
-            );
-        // this.seasonSelect.valueChanges
-        //     .pipe(
-        //         // dispatch action
-        //         // store selector for currentlySelectedSeason?
-        //     ).subscribe(); // make this a subject?
+                select(selectCurrentSeasonId)
+            )
+            .subscribe(seasonId => this.setInitialValue(seasonId));
+    }
+    setInitialValue(value: number): void {
+        this.seasonSelect.setValue(value);
     }
 }

@@ -18,12 +18,15 @@ export const selectAllSeasonsLoaded = createSelector(
 );
 
 // one for onInit initial value and one for when it changes and is needed?
-export const selectCurrentSeason = createSelector(
+export const selectCurrentSeasonId = createSelector(
     selectAllSeasons,
-    allSeasons => allSeasons
-        .filter(
-            season => season.current === true
-        )
+    allSeasons => {
+            const currentSeason = allSeasons.filter(
+                season => season.current === true
+            );
+            return currentSeason[0] ? currentSeason[0].id : 0;
+    }
+
 );
 // necessary?
 // export const selectCurrentlySelectedSeason
