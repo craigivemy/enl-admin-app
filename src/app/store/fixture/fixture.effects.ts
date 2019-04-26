@@ -20,11 +20,11 @@ export class FixtureEffects {
   loadFixturesBySeason$ = this.actions$
       .pipe(
           ofType<AllFixturesBySeasonRequested>(FixtureActionTypes.AllFixturesBySeasonRequested),
-          withLatestFrom(this.store.pipe(select(selectAllFixturesFromSeasonLoaded))),
-          filter(([action, allFixturesLoaded]) => !allFixturesLoaded),
+          // todo make below work
+          //withLatestFrom(this.store.pipe(select(selectAllFixturesFromSeasonLoaded))),
+          //filter(([action, allFixturesLoaded]) => !allFixturesLoaded),
           mergeMap(({payload}) => this.fixtureService.getFixturesBySeason(payload.seasonId)),
           map((fixtures) => new AllFixturesBySeasonLoaded({fixtures}))
-
       );
 
 }
