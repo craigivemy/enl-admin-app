@@ -2,20 +2,20 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { Fixture } from '../../shared/models/fixture.model';
 import { FixtureActions, FixtureActionTypes } from './fixture.actions';
 
-export interface State extends EntityState<Fixture> {
-  // additional entities state properties
+export interface FixturesState extends EntityState<Fixture> {
+  allFixturesFromSeasonLoaded: boolean;
 }
 
 export const adapter: EntityAdapter<Fixture> = createEntityAdapter<Fixture>();
 
-export const initialState: State = adapter.getInitialState({
-  // additional entity state properties
+export const initialFixturesState: FixturesState = adapter.getInitialState({
+  allFixturesFromSeasonLoaded: false
 });
 
 export function reducer(
-  state = initialState,
+  state = initialFixturesState,
   action: FixtureActions
-): State {
+): FixturesState {
   switch (action.type) {
     case FixtureActionTypes.AddFixture: {
       return adapter.addOne(action.payload.fixture, state);
@@ -49,8 +49,8 @@ export function reducer(
       return adapter.removeMany(action.payload.ids, state);
     }
 
-    case FixtureActionTypes.LoadFixtures: {
-      return adapter.addAll(action.payload.fixtures, state);
+    case FixtureActionTypes.AllFixturesBySeasonLoaded: {
+      return adapter.addAll(action.payload.fixtures, {...state, allFixturesFromSeasonLoaded: true});
     }
 
     case FixtureActionTypes.ClearFixtures: {
