@@ -22,6 +22,7 @@ export class FixtureComponent implements OnInit {
         .pipe(
             select(selectCurrentlySelectedSeason)
         ).subscribe();
+    // todo - this is wrong surely, passing id to requested and select?
     this.store.dispatch(new AllFixturesBySeasonRequested(this.seasonId$));
     this.fixtures$ = this.store
         .pipe(
