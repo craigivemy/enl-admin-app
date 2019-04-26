@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
-import { Result } from './result.model';
+import { Result } from '../../shared/models/result.model';
 
 export enum ResultActionTypes {
   LoadResults = '[Result] Load Results',

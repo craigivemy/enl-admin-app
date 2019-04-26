@@ -1,5 +1,5 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { Result } from './result.model';
+import { Result } from '../../shared/models/result.model';
 import { ResultActions, ResultActionTypes } from './result.actions';
 
 export interface State extends EntityState<Result> {
