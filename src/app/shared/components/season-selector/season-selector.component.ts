@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../../store';
 import {AllSeasonsRequested, SelectedSeasonUpdated} from '../../../store/season/season.actions';
-import {Observable, pipe} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Season} from '../../models/season.model';
 import {select} from '@ngrx/store';
 import {selectAllSeasons, selectCurrentSeasonId} from '../../../store/season/season.selectors';
 import {FormControl} from '@angular/forms';
-import {debounceTime, map} from 'rxjs/operators';
-import {tap} from 'rxjs/internal/operators/tap';
 
 @Component({
     selector: 'app-season-selector',
@@ -42,5 +40,4 @@ export class SeasonSelectorComponent implements OnInit {
     setInitialValue(value: number): void {
         this.seasonSelect.setValue(value);
     }
-
 }
