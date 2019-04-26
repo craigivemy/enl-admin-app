@@ -1,4 +1,4 @@
-export interface Match {
+export interface Fixture {
     id: number;
     homeScore: number;
     awayScore: number;

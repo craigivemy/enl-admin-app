@@ -19,7 +19,7 @@ import { SeasonSelectorComponent } from './shared/components/season-selector/sea
 import {MatInputModule, MatOptionModule, MatSelectModule} from '@angular/material';
 import {SeasonEffects} from './store/season/season.effects';
 import {seasonReducer} from './store/season/season.reducer';
-import {FixtureModule} from './modules/fixture/fixture.module';
+import {MatchModule} from './modules/match/match.module';
 import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
@@ -35,7 +35,7 @@ import {ReactiveFormsModule} from '@angular/forms';
         AppMaterialModule,
         HttpClientModule,
         ClubTeamModule,
-        FixtureModule,
+        MatchModule,
         ReactiveFormsModule,
         StoreModule.forRoot(reducers, {metaReducers}),
         StoreRouterConnectingModule.forRoot({

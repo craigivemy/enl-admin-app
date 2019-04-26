@@ -12,4 +12,4 @@ import {AppMaterialModule} from '../../app-material.module';
         AppMaterialModule
     ]
 })
-export class FixtureModule { }
+export class MatchModule { }
