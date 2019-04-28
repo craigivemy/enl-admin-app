@@ -1,11 +1,20 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {FixturesState} from './fixture.reducer';
+import * as fromFixture from './fixture.reducer';
 
 export const selectFixturesState = createFeatureSelector<FixturesState>('fixtures');
 
-export const selectAllFixturesFromSeason = (seasonId: number) => createSelector(
+export const selectAllFixtures = createSelector(
     selectFixturesState,
-    fixturesState => fixturesState.entities[seasonId]
+    fromFixture.selectAll
+);
+
+export const selectAllFixturesFromSeason = (seasonId: number) => createSelector(
+    selectAllFixtures,
+    fixtures => {
+        return fixtures.
+            filter(fixture => fixture.seasonId === seasonId);
+    }
 );
 
 export const selectAllFixturesFromSeasonLoaded = createSelector(
