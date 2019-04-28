@@ -15,8 +15,7 @@ import {map} from 'rxjs/operators';
 export class FixtureService {
 
   constructor(
-      private http: HttpClient,
-      private store: Store<AppState>
+      private http: HttpClient
   ) { }
   fixturesApiUrl = environment.baseApiUrl + ApiRoutes.Matches;
 

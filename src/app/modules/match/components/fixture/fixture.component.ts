@@ -16,14 +16,14 @@ export class FixtureComponent implements OnInit {
   seasonId$;
   fixtures$: Observable<Fixture[]>;
   constructor(private store: Store<AppState>) { }
-
+// todo - this should be a list component or in page directory?
   ngOnInit() {
     this.seasonId$ = this.store
         .pipe(
             select(selectCurrentlySelectedSeason)
         ).subscribe();
 
-    this.store.dispatch(new AllFixturesBySeasonRequested(this.seasonId$));
+    this.store.dispatch(new AllFixturesBySeasonRequested({seasonId: this.seasonId$}));
     this.fixtures$ = this.store
         .pipe(
             select(selectAllFixturesFromSeason(this.seasonId$))
