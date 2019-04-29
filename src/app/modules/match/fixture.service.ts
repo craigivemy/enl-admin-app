@@ -7,7 +7,7 @@ import {AppState} from '../../store';
 import {selectCurrentSeasonId} from '../../store/season/season.selectors';
 import {Observable} from 'rxjs';
 import {Fixture} from '../../shared/models/fixture.model';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,7 @@ export class FixtureService {
   getFixturesBySeason(seasonId: number): Observable<Fixture[]> {
     return this.http.get<Fixture[]>(`${this.fixturesApiUrl}/${seasonId}`)
         .pipe(
+            tap(() => console.log(this.fixturesApiUrl)),
             map(fixtures => fixtures["data"])
         );
   }
