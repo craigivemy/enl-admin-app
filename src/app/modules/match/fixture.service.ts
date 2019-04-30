@@ -17,7 +17,7 @@ export class FixtureService {
   constructor(
       private http: HttpClient
   ) { }
-  fixturesApiUrl = environment.baseApiUrl + ApiRoutes.Matches;
+  fixturesApiUrl = environment.baseApiUrl + ApiRoutes.Fixtures;
 
   getFixturesBySeason(seasonId: number): Observable<Fixture[]> {
     return this.http.get<Fixture[]>(`${this.fixturesApiUrl}/${seasonId}`)

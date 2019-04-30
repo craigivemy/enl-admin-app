@@ -12,10 +12,8 @@ export const selectAllFixtures = createSelector(
 export const selectAllFixturesFromSeason = (seasonId: number) => createSelector(
     selectAllFixtures,
     fixtures => {
-        const fixturesSSS = fixtures.
+        return fixtures.
             filter(fixture => fixture.seasonId === seasonId);
-        console.log(fixturesSSS);
-        return fixturesSSS;
     }
 );
 

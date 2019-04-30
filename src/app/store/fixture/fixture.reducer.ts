@@ -12,7 +12,7 @@ export const initialFixturesState: FixturesState = adapter.getInitialState({
   allFixturesFromSeasonLoaded: false
 });
 
-export function reducer(
+export function fixtureReducer(
   state = initialFixturesState,
   action: FixtureActions
 ): FixturesState {

@@ -21,6 +21,7 @@ export class FixtureEffects {
   loadFixturesBySeason$ = this.actions$
       .pipe(
           ofType<AllFixturesBySeasonRequested>(FixtureActionTypes.AllFixturesBySeasonRequested),
+          tap(() => alert('running')),
           mergeMap(({payload}) => this.fixtureService.getFixturesBySeason(payload.seasonId)),
           map((fixtures) => new AllFixturesBySeasonLoaded({fixtures}))
       );
