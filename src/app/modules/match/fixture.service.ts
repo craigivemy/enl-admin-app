@@ -20,10 +20,10 @@ export class FixtureService {
   fixturesApiUrl = environment.baseApiUrl + ApiRoutes.Fixtures;
 
   getFixturesBySeason(seasonId: number): Observable<Fixture[]> {
-    return this.http.get<Fixture[]>(`${this.fixturesApiUrl}/${seasonId}`)
+    return this.http.get<Fixture[]>(`${this.fixturesApiUrl}`)
         .pipe(
-            tap(() => console.log(this.fixturesApiUrl)),
-            map(fixtures => fixtures["data"])
+            tap((fixtures) => console.log(fixtures["data"])),
+            map(fixtures => fixtures["data"]),
         );
   }
 

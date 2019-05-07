@@ -1,1 +1,6 @@
-<p>{{ fixtures$ | async }}</p>
+<p>test</p>
+<ul>
+    <li *ngFor="let fixture of fixtures$ | async">
+        {{ fixture.id }}
+    </li>
+</ul>
