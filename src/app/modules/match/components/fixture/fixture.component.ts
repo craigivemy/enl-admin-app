@@ -16,8 +16,6 @@ export class FixtureComponent implements OnInit {
   fixtures$: Observable<Fixture[]>;
   constructor(private store: Store<AppState>) { }
 // todo - this should be a list component or in page directory?
-  // todo - use switchMap ?
-  // https://stackoverflow.com/questions/55892886/ngrx-passing-store-value-to-store-selector/55906871#55906871
   ngOnInit() {
     this.store
         .pipe(
