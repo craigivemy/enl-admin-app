@@ -1,15 +1,17 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { Fixture } from '../../shared/models/fixture.model';
-import { FixtureActions, FixtureActionTypes } from './fixture.actions';
+import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
+import {Fixture} from '../../shared/models/fixture.model';
+import {FixtureActions, FixtureActionTypes} from './fixture.actions';
 
 export interface FixturesState extends EntityState<Fixture> {
   allFixturesFromSeasonLoaded: boolean;
+  seasonsLoaded: number[];
 }
 
 export const adapter: EntityAdapter<Fixture> = createEntityAdapter<Fixture>();
 
 export const initialFixturesState: FixturesState = adapter.getInitialState({
-  allFixturesFromSeasonLoaded: false
+  allFixturesFromSeasonLoaded: false,
+  seasonsLoaded: []
 });
 
 export function fixtureReducer(
@@ -50,7 +52,17 @@ export function fixtureReducer(
     }
 
     case FixtureActionTypes.AllFixturesBySeasonLoaded: {
-      return adapter.addAll(action.payload.fixtures, {...state, allFixturesFromSeasonLoaded: true});
+      return adapter.addMany(action.payload.fixtures, {
+        ...state,
+        allFixturesFromSeasonLoaded: true
+      });
+    }
+
+    case FixtureActionTypes.NewSeasonFixturesLoaded: {
+      return {
+        ...state,
+        seasonsLoaded: [1] // todo - needs to be dynamic
+      };
     }
 
     case FixtureActionTypes.ClearFixtures: {
