@@ -58,12 +58,12 @@ export function fixtureReducer(
       });
     }
 
-    case FixtureActionTypes.NewSeasonFixturesLoaded: {
-      return {
-        ...state,
-        seasonsLoaded: [1] // todo - needs to be dynamic
-      };
-    }
+    // case FixtureActionTypes.NewSeasonFixturesLoaded: {
+    //   return {
+    //     ...state,
+    //     seasonsLoaded: [1] // todo - needs to be dynamic
+    //   };
+    // }
 
     case FixtureActionTypes.ClearFixtures: {
       return adapter.removeAll(state);
