@@ -7,6 +7,7 @@ import {AppState} from '../index';
 import {selectAllFixtures, selectAllFixturesFromSeason, selectAllFixturesFromSeasonLoaded} from './fixture.selectors';
 import {FixtureService} from '../../modules/match/fixture.service';
 import {tap} from 'rxjs/internal/operators/tap';
+import {forkJoin, of} from 'rxjs';
 
 
 
@@ -21,18 +22,21 @@ export class FixtureEffects {
   loadFixturesBySeason$ = this.actions$
       .pipe(
           ofType<AllFixturesBySeasonRequested>(FixtureActionTypes.AllFixturesBySeasonRequested),
-          withLatestFrom(this.store.select(selectAllFixtures)), // needs to be bySeasonId
-          switchMap(([action, fixtures]) => {
-              if (fixtures.length) {
-                  return [];
-              }
-              return this.fixtureService.getFixturesBySeason(action.payload.seasonId);
-          }),
-          map(fixtures => new AllFixturesBySeasonLoaded({fixtures}))
-          // withLatestFrom(this.store.pipe(select(selectAllFixturesFromSeasonLoaded))),
-          // filter(([action, allFixturesLoaded]) => !allFixturesLoaded),
-          // mergeMap(([action]) => this.fixtureService.getFixturesBySeason(action.payload.seasonId)),
-          // map((fixtures) => new AllFixturesBySeasonLoaded({fixtures}))
+          map(action => action.payload),
+          switchMap(seasonId => {
+              return this.store
+                  .pipe(
+                      select(selectAllFixturesFromSeason(seasonId.seasonId)),
+                      take(1),
+                      mergeMap(fixtures => {
+                          if (fixtures.length) {
+                              return [];
+                          }
+                          return this.fixtureService.getFixturesBySeason(seasonId.seasonId);
+                      }),
+                      map(fixtures => new AllFixturesBySeasonLoaded({fixtures}))
+                  );
+          })
       );
       // .pipe(
       //     ofType<AllFixturesBySeasonRequested>(FixtureActionTypes.AllFixturesBySeasonRequested),
