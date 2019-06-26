@@ -1,13 +1,13 @@
-import { seasonReducer, initialState } from './season.reducer';
+import { seasonReducer, initialSeasonsState } from './season.reducer';
 
 describe('Season Reducer', () => {
   describe('unknown action', () => {
     it('should return the initial state', () => {
       const action = {} as any;
 
-      const result = seasonReducer(initialState, action);
+      const result = seasonReducer(initialSeasonsState, action);
 
-      expect(result).toBe(initialState);
+      expect(result).toBe(initialSeasonsState);
     });
   });
 });

@@ -23,39 +23,19 @@ export class FixtureEffects {
       .pipe(
           ofType<AllFixturesBySeasonRequested>(FixtureActionTypes.AllFixturesBySeasonRequested),
           map(action => action.payload),
-          switchMap(seasonId => {
+          switchMap(payload => {
               return this.store
                   .pipe(
-                      select(selectAllFixturesFromSeason(seasonId.seasonId)),
+                      select(selectAllFixturesFromSeason(payload.seasonId)),
                       take(1),
                       mergeMap(fixtures => {
                           if (fixtures.length) {
                               return [];
                           }
-                          return this.fixtureService.getFixturesBySeason(seasonId.seasonId);
+                          return this.fixtureService.getFixturesBySeason(payload.seasonId);
                       }),
                       map(fixtures => new AllFixturesBySeasonLoaded({fixtures}))
                   );
           })
       );
-      // .pipe(
-      //     ofType<AllFixturesBySeasonRequested>(FixtureActionTypes.AllFixturesBySeasonRequested),
-      //     map(action => action.payload.seasonId),
-      //     switchMap(seasonId => {
-      //         return this.store
-      //             .pipe(
-      //                 tap(() => console.log(seasonId)),
-      //                 select(selectAllFixturesFromSeason(seasonId)),
-      //                 take(1),
-      //                 mergeMap(fixtures => {
-      //                     if (fixtures.length > 0) {
-      //                         console.log(fixtures);
-      //                         return [];
-      //                     }
-      //                     this.fixtureService.getFixturesBySeason(seasonId);
-      //                 }),
-      //                 map(fixtures => new AllFixturesBySeasonLoaded({fixtures}))
-      //             );
-      //     })
-      // );
 }
