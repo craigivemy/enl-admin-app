@@ -5,7 +5,6 @@ import { Fixture } from '../../shared/models/fixture.model';
 export enum FixtureActionTypes {
     AllFixturesBySeasonRequested = '[Fixtures Component] All Fixtures By Season Requested',
     AllFixturesBySeasonLoaded = '[Fixtures API] All Fixtures By Season Loaded',
-    // NewSeasonFixturesLoaded = '[Fixtures API] New Season of fixtures loaded',
     AddFixture = '[Fixture] Add Fixture',
     UpsertFixture = '[Fixture] Upsert Fixture',
     AddFixtures = '[Fixture] Add Fixtures',
@@ -26,11 +25,6 @@ export class AllFixturesBySeasonLoaded implements Action {
     readonly type = FixtureActionTypes.AllFixturesBySeasonLoaded;
     constructor(public payload: { fixtures: Fixture[] }) {}
 }
-
-// export class NewSeasonFixturesLoaded implements Action {
-//     readonly type = FixtureActionTypes.NewSeasonFixturesLoaded;
-//     constructor(public payload: { seasonId: number }) {}
-// }
 
 export class AddFixture implements Action {
     readonly type = FixtureActionTypes.AddFixture;
@@ -87,7 +81,6 @@ export class ClearFixtures implements Action {
 export type FixtureActions =
     AllFixturesBySeasonRequested
     | AllFixturesBySeasonLoaded
-    // | NewSeasonFixturesLoaded
     | AddFixture
     | UpsertFixture
     | AddFixtures

@@ -4,10 +4,8 @@ import {AllFixturesBySeasonLoaded, AllFixturesBySeasonRequested, FixtureActions,
 import {filter, map, mergeMap, switchMap, take, withLatestFrom} from 'rxjs/operators';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../index';
-import {selectAllFixtures, selectAllFixturesFromSeason, selectAllFixturesFromSeasonLoaded} from './fixture.selectors';
+import {selectAllFixturesFromSeason} from './fixture.selectors';
 import {FixtureService} from '../../modules/match/fixture.service';
-import {tap} from 'rxjs/internal/operators/tap';
-import {forkJoin, of} from 'rxjs';
 
 
 
