@@ -17,12 +17,4 @@ export const selectAllFixturesFromSeason = (seasonId: number) => createSelector(
     }
 );
 
-export const selectAllFixturesFromSeasonLoaded = createSelector(
-    selectFixturesState,
-    fixturesState => fixturesState.allFixturesFromSeasonLoaded
-);
-
-export const selectSeasonsLoaded = (seasonId: any) => createSelector(
-    selectFixturesState,
-    fixturesState => fixturesState.seasonsLoaded.find(seasonId)
-);
+// todo - loading selector functionality
