@@ -1,5 +1,6 @@
 import {Club} from './club.model';
 import {Division} from './division.model';
+import {Season} from './season.model';
 
 export interface Team {
     id: number;
@@ -11,5 +12,6 @@ export interface Team {
     narrative?: string;
     club?: Club;
     division?: Division;
+    seasonIds: {};
     deleted?: boolean;
 }
