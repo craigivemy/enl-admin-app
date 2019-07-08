@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {Team} from '../../shared/models/team.model';
 import {environment} from '../../../environments/environment';
 import {ApiRoutes} from '../../data/api-routes';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,7 @@ export class TeamService {
   getTeamsBySeason(seasonId: number): Observable<Team[]> {
     return this.http.get<Team[]>(`${this.teamsApiUrl}?seasonId=${seasonId}`)
         .pipe(
+            tap(() => console.log(`${this.teamsApiUrl}?seasonId=${seasonId}`)),
             map(teams => teams["data"])
         );
   }

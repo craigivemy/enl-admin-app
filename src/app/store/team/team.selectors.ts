@@ -11,10 +11,5 @@ export const selectAllTeams = createSelector(
 
 export const selectAllTeamsFromSeason = (seasonId: number) => createSelector(
     selectAllTeams,
-    teams => {
-        return teams
-            .filter(
-                team => team.division.id === seasonId
-            );
-    }
+    teams => teams
 );
