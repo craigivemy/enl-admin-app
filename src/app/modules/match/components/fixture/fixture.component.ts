@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {AllFixturesBySeasonRequested} from '../../../../store/fixture/fixture.actions';
 import {Fixture} from '../../../../shared/models/fixture.model';
 import {selectAllFixturesFromSeason} from '../../../../store/fixture/fixture.selectors';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-fixture',

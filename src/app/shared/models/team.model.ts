@@ -1,3 +1,6 @@
+import {Club} from './club.model';
+import {Division} from './division.model';
+
 export interface Team {
     id: number;
     name: string;
@@ -6,7 +9,7 @@ export interface Team {
     tertiaryColour?: string;
     logoUrl?: string;
     narrative?: string;
-    clubId?: number;
-    divisionId?: number;
+    club?: Club;
+    division?: Division;
     deleted?: boolean;
 }

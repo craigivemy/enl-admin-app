@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../../../store';
-import {AllTeamsRequested} from '../../../../store/team/team.actions';
+import {AllTeamsBySeasonRequested, AllTeamsRequested} from '../../../../store/team/team.actions';
 import {Observable} from 'rxjs';
 import {Team} from '../../../../shared/models/team.model';
-import {selectAllTeams} from '../../../../store/team/team.selectors';
+import {selectAllTeams, selectAllTeamsFromSeason} from '../../../../store/team/team.selectors';
+import {selectCurrentlySelectedSeason} from '../../../../store/season/season.selectors';
+import {AllFixturesBySeasonRequested} from '../../../../store/fixture/fixture.actions';
+import {selectAllFixturesFromSeason} from '../../../../store/fixture/fixture.selectors';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-teams',
@@ -18,11 +22,16 @@ export class TeamComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(new AllTeamsRequested());
-    this.teams$ = this.store
+    this.store
         .pipe(
-            select(selectAllTeams)
-        );
+            select(selectCurrentlySelectedSeason),
+            tap(selectedSeason => console.log(selectedSeason))
+        ).subscribe(seasonId => {
+      this.store.dispatch(new AllTeamsBySeasonRequested({seasonId}));
+      this.teams$ = this.store
+          .pipe(
+              select(selectAllTeamsFromSeason(seasonId))
+          );
+    });
   }
-
 }

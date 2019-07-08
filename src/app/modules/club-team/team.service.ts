@@ -13,12 +13,19 @@ export class TeamService {
   constructor(private http: HttpClient) { }
   teamsApiUrl = environment.baseApiUrl + ApiRoutes.Teams;
 
-    getTeams(): Observable<Team[]> {
-      return this.http.get<Team[]>(this.teamsApiUrl)
-          .pipe(
-              map(teams => teams["data"])
-          );
+  getTeams(): Observable<Team[]> {
+    return this.http.get<Team[]>(this.teamsApiUrl)
+        .pipe(
+            map(teams => teams["data"])
+        );
   }
+  getTeamsBySeason(seasonId: number): Observable<Team[]> {
+    return this.http.get<Team[]>(`${this.teamsApiUrl}?seasonId=${seasonId}`)
+        .pipe(
+            map(teams => teams["data"])
+        );
+  }
+
 
 
 }

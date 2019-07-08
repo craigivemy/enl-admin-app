@@ -4,14 +4,12 @@ import {FixtureActions, FixtureActionTypes} from './fixture.actions';
 
 export interface FixturesState extends EntityState<Fixture> {
   allFixturesFromSeasonLoaded: boolean;
-  seasonsLoaded: number[];
 }
 
 export const adapter: EntityAdapter<Fixture> = createEntityAdapter<Fixture>();
 
 export const initialFixturesState: FixturesState = adapter.getInitialState({
   allFixturesFromSeasonLoaded: false,
-  seasonsLoaded: []
 });
 
 export function fixtureReducer(
