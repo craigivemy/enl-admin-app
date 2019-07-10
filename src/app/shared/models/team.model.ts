@@ -12,6 +12,6 @@ export interface Team {
     narrative?: string;
     club?: Club;
     division?: Division;
-    seasonIds: {};
+    seasons?: [{season_id: number}];
     deleted?: boolean;
 }
