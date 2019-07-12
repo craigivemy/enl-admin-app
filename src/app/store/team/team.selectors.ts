@@ -25,7 +25,7 @@ export const selectAllTeamsFromSeason = (seasonId: number) => createSelector(
                 }
             });
         });
-        console.log({teams: thisManyTeams, seasons: thisManySeasons});
+        console.log({teams: thisManyTeams, seasons: thisManySeasons, teamsSelected: filtered});
         return filtered;
     }
 );
