@@ -4,7 +4,7 @@ import {environment} from '../../../environments/environment';
 import {ApiRoutes} from '../../data/api-routes';
 import {Observable} from 'rxjs';
 import {Fixture} from '../../shared/models/fixture.model';
-import {map, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

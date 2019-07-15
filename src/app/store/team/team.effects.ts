@@ -23,12 +23,11 @@ export class TeamEffects {
             switchMap(payload => {
                 return this.store
                     .pipe(
+                        // once page loads, it has one in the store, this will always return a result
                         select(selectAllTeamsFromSeason(payload.seasonId)),
                         take(1),
+                        // todo - make this conditional so it doesn't call api every time
                         mergeMap(teams => {
-                            if (teams.length) {
-                                return [];
-                            }
                             return this.teamsService.getTeamsBySeason(payload.seasonId);
                         }),
                         map(teams => new AllTeamsBySeasonLoaded({teams}))

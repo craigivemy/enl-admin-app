@@ -21,6 +21,7 @@ import {SeasonEffects} from './store/season/season.effects';
 import {seasonReducer} from './store/season/season.reducer';
 import {MatchModule} from './modules/match/match.module';
 import {ReactiveFormsModule} from '@angular/forms';
+import {UmpireModule} from './modules/umpire/umpire.module';
 
 @NgModule({
     declarations: [
@@ -35,6 +36,7 @@ import {ReactiveFormsModule} from '@angular/forms';
         AppMaterialModule,
         HttpClientModule,
         ClubTeamModule,
+        UmpireModule,
         MatchModule,
         ReactiveFormsModule,
         StoreModule.forRoot(reducers, {metaReducers}),

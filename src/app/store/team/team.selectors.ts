@@ -1,7 +1,6 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {TeamsState} from './team.reducer';
 import * as fromTeams from './team.reducer';
-import {filter, map} from 'rxjs/operators';
 
 export const selectTeamsState = createFeatureSelector<TeamsState>('teams');
 
@@ -16,16 +15,18 @@ export const selectAllTeamsFromSeason = (seasonId: number) => createSelector(
         const filtered = [];
         let thisManyTeams = 0;
         let thisManySeasons = 0;
+
         teams.map(team => {
             thisManyTeams++;
             team.seasons.map(season => {
+                console.log(season);
                 thisManySeasons++;
                 if (season.season_id === seasonId) {
                     filtered.push(team);
                 }
             });
         });
-        console.log({teams: thisManyTeams, seasons: thisManySeasons, teamsSelected: filtered});
+        // console.log({teams: thisManyTeams, seasons: thisManySeasons, teamsSelected: filtered});
         return filtered;
     }
 );
