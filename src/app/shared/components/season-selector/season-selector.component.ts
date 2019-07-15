@@ -7,6 +7,7 @@ import {Season} from '../../models/season.model';
 import {select} from '@ngrx/store';
 import {selectAllSeasons, selectCurrentSeasonId} from '../../../store/season/season.selectors';
 import {FormControl} from '@angular/forms';
+import {tap} from 'rxjs/operators';
 
 @Component({
     selector: 'app-season-selector',

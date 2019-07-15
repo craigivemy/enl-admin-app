@@ -28,3 +28,11 @@ export const selectCurrentlySelectedSeason = createSelector(
     selectSeasonsState,
     seasonsState => seasonsState.currentlySelectedSeasonId
 );
+
+export const selectIfSelectedSeasonCurrentSeason = createSelector(
+    selectCurrentlySelectedSeason,
+    selectCurrentSeasonId,
+    (currentlySelected, current) => currentlySelected === current
+);
+
+
