@@ -1,6 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatButtonModule, MatInputModule, MatListModule, MatSelectModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
+import {
+    MatButtonModule, MatCardModule,
+    MatDialogModule,
+    MatInputModule,
+    MatListModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatToolbarModule
+} from '@angular/material';
 
 @NgModule({
     declarations: [],
@@ -12,6 +20,8 @@ import {MatButtonModule, MatInputModule, MatListModule, MatSelectModule, MatSide
         MatSidenavModule,
         MatListModule,
         MatSelectModule,
+        MatDialogModule,
+        MatCardModule
     ],
     exports: [
         CommonModule,
@@ -20,6 +30,8 @@ import {MatButtonModule, MatInputModule, MatListModule, MatSelectModule, MatSide
         MatToolbarModule,
         MatSidenavModule,
         MatListModule,
+        MatDialogModule,
+        MatCardModule,
         MatSelectModule // todo - should imports and exports really be the same here?
     ]
 })

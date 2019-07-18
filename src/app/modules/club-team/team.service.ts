@@ -13,7 +13,7 @@ export class TeamService {
   constructor(private http: HttpClient) { }
   teamsApiUrl = environment.baseApiUrl + ApiRoutes.Teams;
 
-  getTeams(): Observable<Team[]> {
+  getAllTeams(): Observable<Team[]> {
     return this.http.get<Team[]>(this.teamsApiUrl)
         .pipe(
             map(teams => teams["data"])
@@ -25,6 +25,10 @@ export class TeamService {
             tap(() => console.log(`${this.teamsApiUrl}?seasonId=${seasonId}`)),
             map(teams => teams["data"])
         );
+  }
+
+  updateTeam(teamId: number, team: Team) {
+    return this.http.put<Team>(`${this.teamsApiUrl}/${teamId}`, {team});
   }
 
 

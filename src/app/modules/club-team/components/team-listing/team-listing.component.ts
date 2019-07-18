@@ -4,21 +4,22 @@ import {AppState} from '../../../../store';
 import {AllTeamsBySeasonRequested, AllTeamsRequested} from '../../../../store/team/team.actions';
 import {Observable} from 'rxjs';
 import {Team} from '../../../../shared/models/team.model';
-import {selectAllTeams, selectAllTeamsFromSeason} from '../../../../store/team/team.selectors';
+import {selectAllTeamsFromSeason} from '../../../../store/team/team.selectors';
 import {selectCurrentlySelectedSeason} from '../../../../store/season/season.selectors';
-import {AllFixturesBySeasonRequested} from '../../../../store/fixture/fixture.actions';
-import {selectAllFixturesFromSeason} from '../../../../store/fixture/fixture.selectors';
 import {tap} from 'rxjs/operators';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {TeamDialogComponent} from '../team-dialog/team-dialog.component';
 
 @Component({
   selector: 'app-teams',
-  templateUrl: './team.component.html',
-  styleUrls: ['./team.component.css']
+  templateUrl: './team-listing.component.html',
+  styleUrls: ['./team-listing.component.css']
 })
-export class TeamComponent implements OnInit {
+export class TeamListingComponent implements OnInit {
   teams$: Observable<Team[]>;
   constructor(
-      private store: Store<AppState>
+      private store: Store<AppState>,
+      private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -33,5 +34,12 @@ export class TeamComponent implements OnInit {
               select(selectAllTeamsFromSeason(seasonId))
           );
     });
+  }
+  editTeam(team: Team) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = team;
+
+    const dialogRef = this.dialog.open(TeamDialogComponent, dialogConfig);
+
   }
 }

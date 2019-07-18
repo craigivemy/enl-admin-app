@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+      <div *ngFor="let team of teams$ | async" class="col-12 col-sm-6 col-md-4">
+        <mat-card class="my-3">
+          <mat-card-header>
+            <mat-card-title>{{ team.name}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            {{ team.narrative }}
+          </mat-card-content>
+          <mat-card-actions>
+            <button (click)="editTeam(team)" mat-button color="primary">Edit</button>
+          </mat-card-actions>
+        </mat-card>
+    </div>
+  </div>
+</div>

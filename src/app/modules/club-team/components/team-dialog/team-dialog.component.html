@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>{{ teamId }}
+  {{ name }}
+</h2>
+<mat-dialog-content [formGroup]="editTeamForm">
+  <mat-form-field class="d-block">
+    <input matInput formControlName="name">
+  </mat-form-field>
+  <mat-form-field class="d-block">
+    <mat-select formControlName="division">
+      <!-- todo - need a divison selector here -->
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="d-block">
+    <textarea matInput placeholder="Narrative" formControlName="narrative"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="updateTeam()">Save</button>
+</mat-dialog-actions>
