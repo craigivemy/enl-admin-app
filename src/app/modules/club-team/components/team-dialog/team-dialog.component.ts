@@ -1,11 +1,10 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../../../store';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Team} from '../../../../shared/models/team.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TeamService} from '../../team.service';
-import {tap} from 'rxjs/operators';
 import {Update} from '@ngrx/entity';
 import {TeamUpdated} from '../../../../store/team/team.actions';
 
@@ -18,6 +17,7 @@ export class TeamDialogComponent implements OnInit {
   editTeamForm: FormGroup;
   teamId: number;
   name: string;
+  @ViewChild('saveButton') saveButton: ElementRef;
 
   constructor(
       private store: Store<AppState>,
@@ -39,6 +39,16 @@ export class TeamDialogComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  // ngAfterViewInit() {
+  //
+  //   fromEvent(this.saveButton.nativeElement, 'click')
+  //       .pipe(
+  //           exhaustMap(() => this.saveCourse(this.form.value))
+  //       )
+  //       .subscribe();
+  //
+  // }
 
   updateTeam() {
     const changes = this.editTeamForm.value;
