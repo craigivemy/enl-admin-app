@@ -21,6 +21,8 @@ export function teamReducer(state = initialTeamsState, action: TeamActions): Tea
                 ...state,
                 allTeamsFromSeasonLoaded: true
             });
+        case TeamsActionTypes.TeamUpdated:
+            return adapter.updateOne(action.payload.team, state);
         default:
             return state;
     }

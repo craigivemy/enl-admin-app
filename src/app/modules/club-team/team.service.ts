@@ -27,8 +27,8 @@ export class TeamService {
         );
   }
 
-  updateTeam(teamId: number, team: Team) {
-    return this.http.put<Team>(`${this.teamsApiUrl}/${teamId}`, {team});
+  updateTeam(teamId: number, changes: Partial<Team>) {
+    return this.http.put<Team>(`${this.teamsApiUrl}/${teamId}`, changes);
   }
 
 

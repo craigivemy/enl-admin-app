@@ -5,6 +5,9 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Team} from '../../../../shared/models/team.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TeamService} from '../../team.service';
+import {tap} from 'rxjs/operators';
+import {Update} from '@ngrx/entity';
+import {TeamUpdated} from '../../../../store/team/team.actions';
 
 @Component({
   selector: 'app-team-dialog',
@@ -29,7 +32,7 @@ export class TeamDialogComponent implements OnInit {
     this.editTeamForm = fb.group({
       name: [team.name, Validators.required],
       narrative: [team.narrative],
-      division: [team.division, Validators.required]
+     // division: [team.division, Validators.required]
     });
 
   }
@@ -38,11 +41,18 @@ export class TeamDialogComponent implements OnInit {
   }
 
   updateTeam() {
-    const formChanges = this.editTeamForm.value;
-    this.teamService.updateTeam(this.teamId, formChanges)
-        .subscribe(response => console.log(response));
-
-
+    const changes = this.editTeamForm.value;
+    this.teamService.updateTeam(this.teamId, changes)
+        .subscribe(
+            () => {
+              const team: Update<Team> = {
+                id: this.teamId,
+                changes
+              };
+              this.store.dispatch(new TeamUpdated({team}));
+              this.dialogRef.close();
+            }
+        );
   }
 
 }
