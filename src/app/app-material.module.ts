@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
     MatButtonModule, MatCardModule,
-    MatDialogModule,
+    MatDialogModule, MatIconModule,
     MatInputModule,
     MatListModule,
     MatSelectModule,
@@ -21,7 +21,8 @@ import {
         MatListModule,
         MatSelectModule,
         MatDialogModule,
-        MatCardModule
+        MatCardModule,
+        MatIconModule
     ],
     exports: [
         CommonModule,
@@ -32,6 +33,7 @@ import {
         MatListModule,
         MatDialogModule,
         MatCardModule,
+        MatIconModule,
         MatSelectModule // todo - should imports and exports really be the same here?
     ]
 })
