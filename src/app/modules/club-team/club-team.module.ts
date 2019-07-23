@@ -9,9 +9,10 @@ import {TeamEffects} from '../../store/team/team.effects';
 import {AppMaterialModule} from '../../app-material.module';
 import { TeamDialogComponent } from './components/team-dialog/team-dialog.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { AddTeamDialogComponent } from './components/add-team-dialog/add-team-dialog.component';
 
 @NgModule({
-    declarations: [TeamListingComponent, ClubComponent, TeamDialogComponent],
+    declarations: [TeamListingComponent, ClubComponent, TeamDialogComponent, AddTeamDialogComponent],
     imports: [
         CommonModule,
         AppMaterialModule,
@@ -19,6 +20,6 @@ import {ReactiveFormsModule} from '@angular/forms';
         EffectsModule.forFeature([TeamEffects]),
         ReactiveFormsModule
     ],
-    entryComponents: [TeamDialogComponent]
+    entryComponents: [TeamDialogComponent, AddTeamDialogComponent]
 })
 export class ClubTeamModule { }

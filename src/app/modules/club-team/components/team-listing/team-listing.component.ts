@@ -9,6 +9,7 @@ import {selectCurrentlySelectedSeason} from '../../../../store/season/season.sel
 import {tap} from 'rxjs/operators';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {TeamDialogComponent} from '../team-dialog/team-dialog.component';
+import {AddTeamDialogComponent} from '../add-team-dialog/add-team-dialog.component';
 
 @Component({
   selector: 'app-teams',
@@ -41,5 +42,9 @@ export class TeamListingComponent implements OnInit {
 
     const dialogRef = this.dialog.open(TeamDialogComponent, dialogConfig);
 
+  }
+
+  addTeam() {
+    this.dialog.open(AddTeamDialogComponent);
   }
 }
