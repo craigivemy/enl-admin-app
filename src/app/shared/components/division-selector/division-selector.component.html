@@ -1,3 +1,5 @@
-<p>
-  division-selector works!
-</p>
+<mat-form-field>
+  <mat-select [formGroup]="parentForm">
+    <mat-option *ngFor="let division of divisions$ | async" [value]="division.id">{{ division.name }}</mat-option>
+  </mat-select>
+</mat-form-field>

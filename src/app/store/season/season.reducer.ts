@@ -21,11 +21,11 @@ export function seasonReducer(
 ): SeasonsState {
   switch (action.type) {
     // case SeasonActionTypes.AddSeason: {
-    //   return adapter.addOne(action.payload.season, state);
+    //   return adapter.addOne(action.payload.division-season, state);
     // }
     //
     // case SeasonActionTypes.UpsertSeason: {
-    //   return adapter.upsertOne(action.payload.season, state);
+    //   return adapter.upsertOne(action.payload.division-season, state);
     // }
     //
     // case SeasonActionTypes.AddSeasons: {
@@ -37,7 +37,7 @@ export function seasonReducer(
     // }
     //
     // case SeasonActionTypes.UpdateSeason: {
-    //   return adapter.updateOne(action.payload.season, state);
+    //   return adapter.updateOne(action.payload.division-season, state);
     // }
     //
     // case SeasonActionTypes.UpdateSeasons: {

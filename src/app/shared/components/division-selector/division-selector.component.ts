@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable} from 'rxjs';
+import {Division} from '../../models/division.model';
 
 @Component({
   selector: 'app-division-selector',
@@ -6,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./division-selector.component.css']
 })
 export class DivisionSelectorComponent implements OnInit {
-
+  $divisions: Observable<Division[]>;
   constructor() { }
 
   ngOnInit() {

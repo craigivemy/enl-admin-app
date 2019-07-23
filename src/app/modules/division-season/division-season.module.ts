@@ -15,4 +15,4 @@ import {SeasonEffects} from '../../store/season/season.effects';
         EffectsModule.forFeature([SeasonEffects])
     ]
 })
-export class SeasonModule { }
+export class DivisionSeasonModule { }
