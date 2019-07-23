@@ -15,6 +15,5 @@
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-  {{ editTeamForm.status }}
-  <button #saveButton mat-raised-button color="primary" [disabled]="!editTeamForm.valid">Save</button>
+  <button #saveButton mat-raised-button color="primary" [disabled]="!editTeamForm.valid || (formChanged$ | async) == null">Save</button>
 </mat-dialog-actions>

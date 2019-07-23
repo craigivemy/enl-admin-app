@@ -8,7 +8,7 @@ import {TeamService} from '../../team.service';
 import {Update} from '@ngrx/entity';
 import {TeamUpdated} from '../../../../store/team/team.actions';
 import {distinctUntilChanged, exhaustMap, map, tap} from 'rxjs/operators';
-import {fromEvent} from 'rxjs';
+import {fromEvent, Observable} from 'rxjs';
 
 @Component({
     selector: 'app-team-dialog',
@@ -19,6 +19,7 @@ export class TeamDialogComponent implements OnInit, AfterViewInit {
     editTeamForm: FormGroup;
     teamId: number;
     name: string;
+    formChanged$: Observable<boolean>;
     @ViewChild('saveButton', { read: ElementRef }) saveButton: ElementRef;
 
     constructor(
@@ -40,6 +41,10 @@ export class TeamDialogComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
+        this.formChanged$ = this.editTeamForm.valueChanges
+            .pipe(
+                map(value => true)
+            );
     }
 
     ngAfterViewInit() {
