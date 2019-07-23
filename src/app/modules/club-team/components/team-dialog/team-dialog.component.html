@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>{{ teamId }}
+<h2 mat-dialog-title>
   {{ name }}
 </h2>
 <mat-dialog-content [formGroup]="editTeamForm">
@@ -15,5 +15,6 @@
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button #saveButton mat-button>Save</button>
+  {{ editTeamForm.status }}
+  <button #saveButton mat-raised-button color="primary" [disabled]="!editTeamForm.valid">Save</button>
 </mat-dialog-actions>

@@ -7,7 +7,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TeamService} from '../../team.service';
 import {Update} from '@ngrx/entity';
 import {TeamUpdated} from '../../../../store/team/team.actions';
-import {exhaustMap, map} from 'rxjs/operators';
+import {distinctUntilChanged, exhaustMap, map, tap} from 'rxjs/operators';
 import {fromEvent} from 'rxjs';
 
 @Component({
@@ -45,6 +45,8 @@ export class TeamDialogComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         fromEvent(this.saveButton.nativeElement, 'click')
             .pipe(
+                map(() => this.editTeamForm.value),
+                distinctUntilChanged(),
                 exhaustMap(() => this.updateTeam(this.editTeamForm.value))
             ).subscribe();
     }
