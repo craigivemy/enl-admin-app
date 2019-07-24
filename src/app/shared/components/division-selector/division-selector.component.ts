@@ -12,7 +12,7 @@ import {FormControl} from '@angular/forms';
 export class DivisionSelectorComponent implements OnInit {
   divisions: Division[];
   @Input() selectedDivision;
-  division = new FormControl('');
+  division_id = new FormControl('');
   constructor(
       private divisionService: DivisionService
   ) { }
@@ -31,7 +31,7 @@ export class DivisionSelectorComponent implements OnInit {
   }
 
   setInitialValue(value: number): void {
-    this.division.setValue(value);
+    this.division_id.setValue(value);
   }
 
 }
