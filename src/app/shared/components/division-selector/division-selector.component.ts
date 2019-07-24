@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
 import {Division} from '../../models/division.model';
 import {DivisionService} from '../../../modules/division-season/division.service';
-import {FormGroup} from '@angular/forms';
+import {FormControl} from '@angular/forms';
+
 
 @Component({
   selector: 'app-division-selector',
@@ -11,10 +11,16 @@ import {FormGroup} from '@angular/forms';
 })
 export class DivisionSelectorComponent implements OnInit {
   divisions: Division[];
-  constructor(private divisionService: DivisionService) { }
+  @Input() selectedDivision;
+  division = new FormControl('');
+  constructor(
+      private divisionService: DivisionService
+  ) { }
 
   ngOnInit() {
     this.getDivisions();
+    console.log(this.selectedDivision);
+    this.setInitialValue(this.selectedDivision);
   }
 
   getDivisions() {
@@ -23,4 +29,9 @@ export class DivisionSelectorComponent implements OnInit {
             divisions => this.divisions = divisions
         );
   }
+
+  setInitialValue(value: number): void {
+    this.division.setValue(value);
+  }
+
 }

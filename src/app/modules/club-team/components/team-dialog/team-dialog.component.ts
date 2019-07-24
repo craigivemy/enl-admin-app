@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Inject, Input, OnInit, ViewChild} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../../../store';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
@@ -19,6 +19,7 @@ export class TeamDialogComponent implements OnInit, AfterViewInit {
     editTeamForm: FormGroup;
     teamId: number;
     name: string;
+    divisionId: number;
     formChanged$: Observable<boolean>;
     @ViewChild('saveButton', { read: ElementRef }) saveButton: ElementRef;
 
@@ -31,11 +32,12 @@ export class TeamDialogComponent implements OnInit, AfterViewInit {
     ) {
         this.teamId = team.id;
         this.name = team.name;
+        this.divisionId = team.division.id;
 
         this.editTeamForm = fb.group({
             name: [team.name, Validators.required],
             narrative: [team.narrative],
-            // division: [team.division, Validators.required]
+            division: [team.division.id, Validators.required]
         });
 
     }
