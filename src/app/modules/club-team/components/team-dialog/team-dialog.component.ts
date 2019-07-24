@@ -43,7 +43,7 @@ export class TeamDialogComponent implements OnInit, AfterViewInit {
     ngOnInit() {
         this.formChanged$ = this.editTeamForm.valueChanges
             .pipe(
-                map(value => true)
+                map(() => true)
             );
     }
 

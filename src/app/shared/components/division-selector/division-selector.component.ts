@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Division} from '../../models/division.model';
+import {DivisionService} from '../../../modules/division-season/division.service';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-division-selector',
@@ -8,10 +10,17 @@ import {Division} from '../../models/division.model';
   styleUrls: ['./division-selector.component.css']
 })
 export class DivisionSelectorComponent implements OnInit {
-  $divisions: Observable<Division[]>;
-  constructor() { }
+  divisions: Division[];
+  constructor(private divisionService: DivisionService) { }
 
   ngOnInit() {
+    this.getDivisions();
   }
 
+  getDivisions() {
+    return this.divisionService.getActiveDivisions()
+        .subscribe(
+            divisions => this.divisions = divisions
+        );
+  }
 }

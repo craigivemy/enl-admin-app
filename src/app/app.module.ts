@@ -22,14 +22,12 @@ import {seasonReducer} from './store/season/season.reducer';
 import {MatchModule} from './modules/match/match.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {UmpireModule} from './modules/umpire/umpire.module';
-import { DivisionSelectorComponent } from './shared/components/division-selector/division-selector.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
-        SeasonSelectorComponent,
-        DivisionSelectorComponent
+        SeasonSelectorComponent
     ],
     imports: [
         BrowserModule,
@@ -53,6 +51,9 @@ import { DivisionSelectorComponent } from './shared/components/division-selector
         MatSelectModule
     ],
     providers: [],
+    exports: [
+
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
