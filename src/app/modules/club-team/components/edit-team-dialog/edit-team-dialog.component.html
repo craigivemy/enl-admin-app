@@ -6,7 +6,7 @@
     <input matInput formControlName="name">
   </mat-form-field>
   <mat-form-field>
-    <mat-select formControlName="division">
+    <mat-select formControlName="division_id">
       <mat-option *ngFor="let division of divisions$ | async" [value]="division.id">{{ division.name }}</mat-option>
     </mat-select>
   </mat-form-field>

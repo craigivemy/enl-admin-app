@@ -41,7 +41,7 @@ export class EditTeamDialogComponent implements OnInit, AfterViewInit {
         this.editTeamForm = fb.group({
             name: [team.name, Validators.required],
             narrative: [team.narrative],
-            division: [team.division.id, Validators.required]
+            division_id: [team.division.id, Validators.required]
         });
 
     }
