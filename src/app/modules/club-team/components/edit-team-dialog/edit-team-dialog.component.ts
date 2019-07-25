@@ -15,10 +15,10 @@ import {selectAllDivisions} from '../../../../store/division/division.selectors'
 
 @Component({
     selector: 'app-team-dialog',
-    templateUrl: './team-dialog.component.html',
-    styleUrls: ['./team-dialog.component.css']
+    templateUrl: './edit-team-dialog.component.html',
+    styleUrls: ['./edit-team-dialog.component.css']
 })
-export class TeamDialogComponent implements OnInit, AfterViewInit {
+export class EditTeamDialogComponent implements OnInit, AfterViewInit {
     editTeamForm: FormGroup;
     teamId: number;
     name: string;
@@ -30,7 +30,7 @@ export class TeamDialogComponent implements OnInit, AfterViewInit {
     constructor(
         private store: Store<AppState>,
         private teamService: TeamService,
-        private dialogRef: MatDialogRef<TeamDialogComponent>,
+        private dialogRef: MatDialogRef<EditTeamDialogComponent>,
         private fb: FormBuilder,
         @Inject(MAT_DIALOG_DATA) team: Team
     ) {

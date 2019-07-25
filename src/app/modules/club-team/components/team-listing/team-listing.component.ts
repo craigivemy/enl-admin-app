@@ -7,7 +7,7 @@ import {Team} from '../../../../shared/models/team.model';
 import {selectAllTeamsFromSeason} from '../../../../store/team/team.selectors';
 import {selectCurrentlySelectedSeason} from '../../../../store/season/season.selectors';
 import {MatDialog, MatDialogConfig} from '@angular/material';
-import {TeamDialogComponent} from '../team-dialog/team-dialog.component';
+import {EditTeamDialogComponent} from '../edit-team-dialog/edit-team-dialog.component';
 import {AddTeamDialogComponent} from '../add-team-dialog/add-team-dialog.component';
 
 @Component({
@@ -42,7 +42,7 @@ export class TeamListingComponent implements OnInit {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.data = team;
 
-        const dialogRef = this.dialog.open(TeamDialogComponent, dialogConfig);
+        const dialogRef = this.dialog.open(EditTeamDialogComponent, dialogConfig);
 
     }
 

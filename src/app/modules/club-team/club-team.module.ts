@@ -7,12 +7,12 @@ import {teamReducer} from '../../store/team/team.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {TeamEffects} from '../../store/team/team.effects';
 import {AppMaterialModule} from '../../app-material.module';
-import { TeamDialogComponent } from './components/team-dialog/team-dialog.component';
+import { EditTeamDialogComponent } from './components/edit-team-dialog/edit-team-dialog.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { AddTeamDialogComponent } from './components/add-team-dialog/add-team-dialog.component';
 
 @NgModule({
-    declarations: [TeamListingComponent, ClubComponent, TeamDialogComponent, AddTeamDialogComponent],
+    declarations: [TeamListingComponent, ClubComponent, EditTeamDialogComponent, AddTeamDialogComponent],
     imports: [
         CommonModule,
         AppMaterialModule,
@@ -20,6 +20,6 @@ import { AddTeamDialogComponent } from './components/add-team-dialog/add-team-di
         EffectsModule.forFeature([TeamEffects]),
         ReactiveFormsModule
     ],
-    entryComponents: [TeamDialogComponent, AddTeamDialogComponent]
+    entryComponents: [EditTeamDialogComponent, AddTeamDialogComponent]
 })
 export class ClubTeamModule { }
