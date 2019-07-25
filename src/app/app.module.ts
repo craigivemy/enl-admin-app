@@ -22,6 +22,7 @@ import {seasonReducer} from './store/season/season.reducer';
 import {MatchModule} from './modules/match/match.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {UmpireModule} from './modules/umpire/umpire.module';
+import {DivisionSeasonModule} from './modules/division-season/division-season.module';
 
 @NgModule({
     declarations: [
@@ -38,6 +39,7 @@ import {UmpireModule} from './modules/umpire/umpire.module';
         ClubTeamModule,
         UmpireModule,
         MatchModule,
+        DivisionSeasonModule,
         ReactiveFormsModule,
         StoreModule.forRoot(reducers, {metaReducers}),
         StoreRouterConnectingModule.forRoot({

@@ -15,8 +15,16 @@ export class DivisionService {
     constructor(private http: HttpClient) {
     }
 
-    getActiveDivisions(): Observable<Division[]> {
+    getAllDivisions(): Observable<Division[]> {
         return this.http.get(`${this.divisionsApiUrl}`)
+            .pipe(
+                map(divisions => divisions['data'])
+            );
+    }
+
+    // todo - remove if not used
+    getActiveDivisions(): Observable<Division[]> {
+        return this.http.get(`${this.divisionsApiUrl}?current=1`)
             .pipe(
                 map(divisions => divisions['data'])
             );
