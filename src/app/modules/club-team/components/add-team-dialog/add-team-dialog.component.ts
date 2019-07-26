@@ -10,7 +10,7 @@ import {TeamService} from '../../team.service';
 import {distinctUntilChanged, exhaustMap, map, tap} from 'rxjs/operators';
 import {Team} from '../../../../shared/models/team.model';
 import {TeamAdded} from '../../../../store/team/team.actions';
-import {MatDialogRef, MatSnackBar, MatSnackBarConfig} from '@angular/material';
+import {MatDialogRef, MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-add-team-dialog',
@@ -59,9 +59,7 @@ export class AddTeamDialogComponent implements OnInit, AfterViewInit {
             map((createdTeam) => {
               this.store.dispatch(new TeamAdded({team: createdTeam["data"]}));
               this.dialogRef.close();
-              const matSnackBarRef = new MatSnackBarConfig();
-              matSnackBarRef.data = { newTeamId: createdTeam["data"].id };
-              this.snackBar.open('Test', 'UNDO', matSnackBarRef);
+              this.snackBar.open('Test', 'UNDO');
             })
         );
   }
