@@ -10,7 +10,7 @@ import {TeamService} from '../../team.service';
 import {distinctUntilChanged, exhaustMap, map, tap} from 'rxjs/operators';
 import {Team} from '../../../../shared/models/team.model';
 import {TeamAdded} from '../../../../store/team/team.actions';
-import {MatDialogRef} from '@angular/material';
+import {MatDialogRef, MatSnackBar, MatSnackBarConfig} from '@angular/material';
 
 @Component({
   selector: 'app-add-team-dialog',
@@ -26,6 +26,7 @@ export class AddTeamDialogComponent implements OnInit, AfterViewInit {
       private store: Store<AppState>,
       private teamService: TeamService,
       private dialogRef: MatDialogRef<AddTeamDialogComponent>,
+      private snackBar: MatSnackBar
   ) {
     this.addTeamForm = fb.group({
       name: ['', Validators.required],
@@ -58,8 +59,15 @@ export class AddTeamDialogComponent implements OnInit, AfterViewInit {
             map((createdTeam) => {
               this.store.dispatch(new TeamAdded({team: createdTeam["data"]}));
               this.dialogRef.close();
+              const matSnackBarRef = new MatSnackBarConfig();
+              matSnackBarRef.data = { newTeamId: createdTeam["data"].id };
+              this.snackBar.open('Test', 'UNDO', matSnackBarRef);
             })
         );
+  }
+
+  undoAddTeam() {
+
   }
 
 }

@@ -6,7 +6,7 @@ import {
     MatInputModule,
     MatListModule,
     MatSelectModule,
-    MatSidenavModule,
+    MatSidenavModule, MatSnackBarModule,
     MatToolbarModule
 } from '@angular/material';
 
@@ -22,7 +22,8 @@ import {
         MatSelectModule,
         MatDialogModule,
         MatCardModule,
-        MatIconModule
+        MatIconModule,
+        MatSnackBarModule
     ],
     exports: [
         CommonModule,
@@ -34,6 +35,7 @@ import {
         MatDialogModule,
         MatCardModule,
         MatIconModule,
+        MatSnackBarModule,
         MatSelectModule // todo - should imports and exports really be the same here?
     ]
 })

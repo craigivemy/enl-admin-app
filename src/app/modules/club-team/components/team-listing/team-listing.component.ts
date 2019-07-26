@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, Optional} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../../../store';
 import {AllTeamsBySeasonRequested} from '../../../../store/team/team.actions';
@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 import {Team} from '../../../../shared/models/team.model';
 import {selectAllTeamsFromSeason} from '../../../../store/team/team.selectors';
 import {selectCurrentlySelectedSeason} from '../../../../store/season/season.selectors';
-import {MatDialog, MatDialogConfig} from '@angular/material';
+import {MAT_SNACK_BAR_DATA, MatDialog, MatDialogConfig, MatSnackBarRef} from '@angular/material';
 import {EditTeamDialogComponent} from '../edit-team-dialog/edit-team-dialog.component';
 import {AddTeamDialogComponent} from '../add-team-dialog/add-team-dialog.component';
 
@@ -20,7 +20,7 @@ export class TeamListingComponent implements OnInit {
 
     constructor(
         private store: Store<AppState>,
-        private dialog: MatDialog
+        private dialog: MatDialog,
     ) {
     }
 
@@ -36,6 +36,8 @@ export class TeamListingComponent implements OnInit {
                         select(selectAllTeamsFromSeason(seasonId))
                     );
             });
+
+
     }
 
     editTeam(team: Team) {
@@ -49,4 +51,6 @@ export class TeamListingComponent implements OnInit {
     addTeam() {
         this.dialog.open(AddTeamDialogComponent, new MatDialogConfig());
     }
+
+
 }
