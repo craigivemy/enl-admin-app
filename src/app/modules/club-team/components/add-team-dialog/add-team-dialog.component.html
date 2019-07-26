@@ -1,3 +1,19 @@
-<p>
-  add-team-dialog works!
-</p>
+<h2 mat-dialog-title>
+  Add New Team
+</h2>
+<mat-dialog-content [formGroup]="addTeamForm">
+  <mat-form-field class="d-block">
+    <input matInput formControlName="name">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select formControlName="division_id">
+      <mat-option *ngFor="let division of divisions$ | async" [value]="division.id">{{ division.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="d-block">
+    <textarea matInput placeholder="Narrative" formControlName="narrative"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button #saveButton mat-raised-button color="primary" [disabled]="!addTeamForm.valid || !addTeamForm.dirty">Save</button>
+</mat-dialog-actions>

@@ -30,6 +30,10 @@ export class TeamService {
     return this.http.put<Team>(`${this.teamsApiUrl}/${teamId}`, changes);
   }
 
+  addTeam(team: Team): Observable<Team> {
+    return this.http.post<Team>(`${this.teamsApiUrl}`, team);
+  }
+
 
 
 }

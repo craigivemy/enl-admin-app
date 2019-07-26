@@ -1,15 +1,63 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../../../../store';
+import {fromEvent, Observable} from 'rxjs';
+import {Division} from '../../../../shared/models/division.model';
+import {AllDivisionsRequested} from '../../../../store/division/division.actions';
+import {selectAllDivisions} from '../../../../store/division/division.selectors';
+import {TeamService} from '../../team.service';
+import {distinctUntilChanged, exhaustMap, map} from 'rxjs/operators';
+import {Team} from '../../../../shared/models/team.model';
+import {TeamAdded} from '../../../../store/team/team.actions';
+import {MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-add-team-dialog',
   templateUrl: './add-team-dialog.component.html',
   styleUrls: ['./add-team-dialog.component.css']
 })
-export class AddTeamDialogComponent implements OnInit {
-
-  constructor() { }
-
+export class AddTeamDialogComponent implements OnInit, AfterViewInit {
+  divisions$: Observable<Division[]>;
+  addTeamForm: FormGroup;
+  @ViewChild('saveButton', { read: ElementRef }) saveButton: ElementRef;
+  constructor(
+      private fb: FormBuilder,
+      private store: Store<AppState>,
+      private teamService: TeamService,
+      private dialogRef: MatDialogRef<AddTeamDialogComponent>,
+  ) {
+    this.addTeamForm = fb.group({
+      name: ['', Validators.required],
+      narrative: [''],
+      division_id: ['', Validators.required]
+    });
+  }
   ngOnInit() {
+    this.store.dispatch(new AllDivisionsRequested());
+    this.divisions$ = this.store
+        .pipe(
+            select(selectAllDivisions)
+        );
+  }
+
+  ngAfterViewInit() {
+    fromEvent(this.saveButton.nativeElement, 'click')
+        .pipe(
+            map(() => this.addTeamForm.value),
+            distinctUntilChanged(),
+            exhaustMap(() => this.addTeam(this.addTeamForm.value))
+        ).subscribe();
+  }
+
+  addTeam(team: Team) {
+    return this.teamService.addTeam(team)
+        .pipe(
+            map((createdTeam) => {
+              this.store.dispatch(new TeamAdded({team: createdTeam}));
+              this.dialogRef.close();
+            })
+        );
   }
 
 }

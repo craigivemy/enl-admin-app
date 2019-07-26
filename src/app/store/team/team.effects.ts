@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {AllTeamsBySeasonLoaded, AllTeamsBySeasonRequested, TeamsActionTypes} from './team.actions';
+import {AllTeamsBySeasonLoaded, AllTeamsBySeasonRequested, TeamActionTypes} from './team.actions';
 import {map, mergeMap, switchMap, take} from 'rxjs/operators';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../index';
@@ -18,7 +18,7 @@ export class TeamEffects {
     @Effect()
     loadTeamsBySeason$ = this.actions$
         .pipe(
-            ofType<AllTeamsBySeasonRequested>(TeamsActionTypes.AllTeamsBySeasonRequested),
+            ofType<AllTeamsBySeasonRequested>(TeamActionTypes.AllTeamsBySeasonRequested),
             map (action => action.payload),
             switchMap(payload => {
                 return this.store

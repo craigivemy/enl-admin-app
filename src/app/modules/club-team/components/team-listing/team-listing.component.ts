@@ -39,14 +39,14 @@ export class TeamListingComponent implements OnInit {
     }
 
     editTeam(team: Team) {
-        const dialogConfig = new MatDialogConfig();
-        dialogConfig.data = team;
+        const editTeamDialogConfig = new MatDialogConfig();
+        editTeamDialogConfig.data = team;
 
-        const dialogRef = this.dialog.open(EditTeamDialogComponent, dialogConfig);
+        const editDialogRef = this.dialog.open(EditTeamDialogComponent, editTeamDialogConfig);
 
     }
 
     addTeam() {
-        this.dialog.open(AddTeamDialogComponent);
+        this.dialog.open(AddTeamDialogComponent, new MatDialogConfig());
     }
 }
