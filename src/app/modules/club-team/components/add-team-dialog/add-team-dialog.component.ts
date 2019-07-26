@@ -7,7 +7,7 @@ import {Division} from '../../../../shared/models/division.model';
 import {AllDivisionsRequested} from '../../../../store/division/division.actions';
 import {selectAllDivisions} from '../../../../store/division/division.selectors';
 import {TeamService} from '../../team.service';
-import {distinctUntilChanged, exhaustMap, map} from 'rxjs/operators';
+import {distinctUntilChanged, exhaustMap, map, tap} from 'rxjs/operators';
 import {Team} from '../../../../shared/models/team.model';
 import {TeamAdded} from '../../../../store/team/team.actions';
 import {MatDialogRef} from '@angular/material';
@@ -51,10 +51,12 @@ export class AddTeamDialogComponent implements OnInit, AfterViewInit {
   }
 
   addTeam(team: Team) {
+    // todo - handle 409 errors, and any error shouldn't stop them trying again
     return this.teamService.addTeam(team)
         .pipe(
+            tap(created => console.log(created)),
             map((createdTeam) => {
-              this.store.dispatch(new TeamAdded({team: createdTeam}));
+              this.store.dispatch(new TeamAdded({team: createdTeam["data"]}));
               this.dialogRef.close();
             })
         );

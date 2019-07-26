@@ -14,11 +14,13 @@ export const selectAllTeamsFromSeason = (seasonId: number) => createSelector(
     teams => {
         const filtered = [];
         teams.map(team => {
-            team.seasons.map(season => {
-                if (season.season_id === seasonId) {
-                    filtered.push(team);
-                }
-            });
+            if (team.seasons) {
+                team.seasons.map(season => {
+                    if (season.season_id === seasonId) {
+                        filtered.push(team);
+                    }
+                });
+            }
         });
         return filtered;
     }

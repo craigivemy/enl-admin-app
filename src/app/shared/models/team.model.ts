@@ -1,6 +1,5 @@
 import {Club} from './club.model';
 import {Division} from './division.model';
-import {Season} from './season.model';
 
 export interface Team {
     id: number;
