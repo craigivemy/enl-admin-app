@@ -4,7 +4,7 @@ import {
     MatButtonModule, MatCardModule,
     MatDialogModule, MatIconModule,
     MatInputModule,
-    MatListModule,
+    MatListModule, MatOptionModule,
     MatSelectModule,
     MatSidenavModule, MatSnackBarModule,
     MatToolbarModule
@@ -23,7 +23,10 @@ import {
         MatDialogModule,
         MatCardModule,
         MatIconModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatInputModule,
+        MatOptionModule,
+        MatSelectModule
     ],
     exports: [
         CommonModule,
@@ -36,6 +39,8 @@ import {
         MatCardModule,
         MatIconModule,
         MatSnackBarModule,
+        MatInputModule,
+        MatOptionModule,
         MatSelectModule // todo - should imports and exports really be the same here?
     ]
 })

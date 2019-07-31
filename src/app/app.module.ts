@@ -15,7 +15,6 @@ import {CustomSerializer} from './shared/utils';
 import {EffectsModule} from '@ngrx/effects';
 import {HttpClientModule} from '@angular/common/http';
 import {ClubTeamModule} from './club-team/club-team.module';
-import { SeasonSelectorComponent } from './shared/components/season-selector/season-selector.component';
 import {MatInputModule, MatOptionModule, MatSelectModule} from '@angular/material';
 import {SeasonEffects} from './store/season/season.effects';
 import {seasonReducer} from './store/season/season.reducer';
@@ -23,12 +22,12 @@ import {MatchModule} from './match/match.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {UmpireModule} from './umpire/umpire.module';
 import {DivisionSeasonModule} from './division-season/division-season.module';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
     declarations: [
         AppComponent,
-        HomeComponent,
-        SeasonSelectorComponent
+        HomeComponent
     ],
     imports: [
         BrowserModule,
@@ -36,6 +35,7 @@ import {DivisionSeasonModule} from './division-season/division-season.module';
         BrowserAnimationsModule,
         AppMaterialModule,
         HttpClientModule,
+        SharedModule,
         ClubTeamModule,
         UmpireModule,
         MatchModule,
@@ -47,10 +47,7 @@ import {DivisionSeasonModule} from './division-season/division-season.module';
         }),
         StoreModule.forFeature('seasons', seasonReducer),
         EffectsModule.forRoot([SeasonEffects]),
-        !environment.production ? StoreDevtoolsModule.instrument() : [],
-        MatInputModule,
-        MatOptionModule,
-        MatSelectModule
+        !environment.production ? StoreDevtoolsModule.instrument() : []
     ],
     providers: [],
     exports: [
