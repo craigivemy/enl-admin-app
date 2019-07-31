@@ -6,7 +6,7 @@ import {AllSeasonsLoaded, AllSeasonsRequested, SeasonActionTypes} from './season
 import {filter, map, mergeMap, withLatestFrom} from 'rxjs/operators';
 import {selectAllSeasonsLoaded} from './season.selectors';
 import {select} from '@ngrx/store';
-import {SeasonService} from '../../modules/division-season/season.service';
+import {SeasonService} from '../../division-season/season.service';
 
 
 

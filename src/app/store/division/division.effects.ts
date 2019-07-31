@@ -5,7 +5,7 @@ import {filter, map, mergeMap, withLatestFrom} from 'rxjs/operators';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../index';
 import {selectAllDivisionsLoaded} from './division.selectors';
-import {DivisionService} from '../../modules/division-season/division.service';
+import {DivisionService} from '../../division-season/division.service';
 
 
 

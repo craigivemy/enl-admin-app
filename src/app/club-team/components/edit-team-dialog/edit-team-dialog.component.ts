@@ -1,17 +1,17 @@
 import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {select, Store} from '@ngrx/store';
-import {AppState} from '../../../../store';
+import {AppState} from '../../../store';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {Team} from '../../../../shared/models/team.model';
+import {Team} from '../../../shared/models/team.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TeamService} from '../../team.service';
 import {Update} from '@ngrx/entity';
-import {TeamUpdated} from '../../../../store/team/team.actions';
+import {TeamUpdated} from '../../../store/team/team.actions';
 import {distinctUntilChanged, exhaustMap, map} from 'rxjs/operators';
 import {fromEvent, Observable} from 'rxjs';
-import {Division} from '../../../../shared/models/division.model';
-import {AllDivisionsRequested} from '../../../../store/division/division.actions';
-import {selectAllDivisions} from '../../../../store/division/division.selectors';
+import {Division} from '../../../shared/models/division.model';
+import {AllDivisionsRequested} from '../../../store/division/division.actions';
+import {selectAllDivisions} from '../../../store/division/division.selectors';
 
 @Component({
     selector: 'app-team-dialog',

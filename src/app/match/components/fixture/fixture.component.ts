@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {select, Store} from '@ngrx/store';
-import {AppState} from '../../../../store';
-import {selectCurrentlySelectedSeason} from '../../../../store/season/season.selectors';
+import {AppState} from '../../../store';
+import {selectCurrentlySelectedSeason} from '../../../store/season/season.selectors';
 import {Observable} from 'rxjs';
-import {AllFixturesBySeasonRequested} from '../../../../store/fixture/fixture.actions';
-import {Fixture} from '../../../../shared/models/fixture.model';
-import {selectAllFixturesFromSeason} from '../../../../store/fixture/fixture.selectors';
+import {AllFixturesBySeasonRequested} from '../../../store/fixture/fixture.actions';
+import {Fixture} from '../../../shared/models/fixture.model';
+import {selectAllFixturesFromSeason} from '../../../store/fixture/fixture.selectors';
 import {tap} from 'rxjs/operators';
 
 @Component({

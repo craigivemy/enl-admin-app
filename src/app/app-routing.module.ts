@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {HomeComponent} from './modules/home/home.component';
-import {TeamListingComponent} from './modules/club-team/components/team-listing/team-listing.component';
-import {FixtureComponent} from './modules/match/components/fixture/fixture.component';
-import {UmpireComponent} from './modules/umpire/components/umpire/umpire.component';
+import {HomeComponent} from './home/home.component';
+import {TeamListingComponent} from './club-team/components/team-listing/team-listing.component';
+import {FixtureComponent} from './match/components/fixture/fixture.component';
+import {UmpireComponent} from './umpire/components/umpire/umpire.component';
 
 const routes: Routes = [
     {
@@ -21,6 +21,15 @@ const routes: Routes = [
     {
         path: 'umpires',
         component: UmpireComponent
+    },
+    {
+        path: 'history',
+        loadChildren: () => import('./history/history.module').then(mod => mod.HistoryModule)
+    },
+    {
+        path: '',
+        redirectTo: '',
+        pathMatch: 'full'
     }
 ];
 

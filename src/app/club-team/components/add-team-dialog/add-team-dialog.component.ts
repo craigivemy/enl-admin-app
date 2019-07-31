@@ -1,15 +1,15 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
-import {AppState} from '../../../../store';
+import {AppState} from '../../../store';
 import {fromEvent, Observable} from 'rxjs';
-import {Division} from '../../../../shared/models/division.model';
-import {AllDivisionsRequested} from '../../../../store/division/division.actions';
-import {selectAllDivisions} from '../../../../store/division/division.selectors';
+import {Division} from '../../../shared/models/division.model';
+import {AllDivisionsRequested} from '../../../store/division/division.actions';
+import {selectAllDivisions} from '../../../store/division/division.selectors';
 import {TeamService} from '../../team.service';
 import {distinctUntilChanged, exhaustMap, map, tap} from 'rxjs/operators';
-import {Team} from '../../../../shared/models/team.model';
-import {TeamAdded} from '../../../../store/team/team.actions';
+import {Team} from '../../../shared/models/team.model';
+import {TeamAdded} from '../../../store/team/team.actions';
 import {MatDialogRef, MatSnackBar} from '@angular/material';
 
 @Component({

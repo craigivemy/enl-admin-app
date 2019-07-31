@@ -4,7 +4,7 @@ import {AllTeamsBySeasonLoaded, AllTeamsBySeasonRequested, TeamActionTypes} from
 import {map, mergeMap, switchMap, take} from 'rxjs/operators';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../index';
-import {TeamService} from '../../modules/club-team/team.service';
+import {TeamService} from '../../club-team/team.service';
 import {selectAllTeamsFromSeason} from './team.selectors';
 
 @Injectable()

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
-import {Umpire} from '../../../../shared/models/umpire.model';
+import {Umpire} from '../../../shared/models/umpire.model';
 import {select, Store} from '@ngrx/store';
-import {AppState} from '../../../../store';
-import {selectAllUmpires} from '../../../../store/umpire/umpire.selectors';
-import {AllUmpiresRequested} from '../../../../store/umpire/umpire.actions';
+import {AppState} from '../../../store';
+import {selectAllUmpires} from '../../../store/umpire/umpire.selectors';
+import {AllUmpiresRequested} from '../../../store/umpire/umpire.actions';
 
 @Component({
   selector: 'app-umpire',

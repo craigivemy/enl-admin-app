@@ -5,7 +5,7 @@ import {filter, map, mergeMap, switchMap, take, withLatestFrom} from 'rxjs/opera
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../index';
 import {selectAllFixturesFromSeason} from './fixture.selectors';
-import {FixtureService} from '../../modules/match/fixture.service';
+import {FixtureService} from '../../match/fixture.service';
 
 
 

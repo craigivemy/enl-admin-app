@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
-import {ApiRoutes} from '../../data/api-routes';
+import {environment} from '../../environments/environment';
+import {ApiRoutes} from '../data/api-routes';
 import {Observable} from 'rxjs';
-import {Fixture} from '../../shared/models/fixture.model';
+import {Fixture} from '../shared/models/fixture.model';
 import {map} from 'rxjs/operators';
 
 @Injectable({

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Team} from '../../shared/models/team.model';
-import {environment} from '../../../environments/environment';
-import {ApiRoutes} from '../../data/api-routes';
+import {Team} from '../shared/models/team.model';
+import {environment} from '../../environments/environment';
+import {ApiRoutes} from '../data/api-routes';
 import {map} from 'rxjs/operators';
 
 // todo - error handling

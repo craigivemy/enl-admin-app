@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {UmpireService} from '../../modules/umpire/umpire.service';
+import {UmpireService} from '../../umpire/umpire.service';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../index';
 import {AllUmpiresLoaded, AllUmpiresRequested, UmpireActionTypes} from './umpire.actions';

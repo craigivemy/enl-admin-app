@@ -9,20 +9,20 @@ import { reducers, metaReducers } from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import {AppMaterialModule} from './app-material.module';
-import { HomeComponent } from './modules/home/home.component';
+import { HomeComponent } from './home/home.component';
 import {StoreRouterConnectingModule} from '@ngrx/router-store';
 import {CustomSerializer} from './shared/utils';
 import {EffectsModule} from '@ngrx/effects';
 import {HttpClientModule} from '@angular/common/http';
-import {ClubTeamModule} from './modules/club-team/club-team.module';
+import {ClubTeamModule} from './club-team/club-team.module';
 import { SeasonSelectorComponent } from './shared/components/season-selector/season-selector.component';
 import {MatInputModule, MatOptionModule, MatSelectModule} from '@angular/material';
 import {SeasonEffects} from './store/season/season.effects';
 import {seasonReducer} from './store/season/season.reducer';
-import {MatchModule} from './modules/match/match.module';
+import {MatchModule} from './match/match.module';
 import {ReactiveFormsModule} from '@angular/forms';
-import {UmpireModule} from './modules/umpire/umpire.module';
-import {DivisionSeasonModule} from './modules/division-season/division-season.module';
+import {UmpireModule} from './umpire/umpire.module';
+import {DivisionSeasonModule} from './division-season/division-season.module';
 
 @NgModule({
     declarations: [

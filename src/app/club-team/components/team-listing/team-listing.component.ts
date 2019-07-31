@@ -1,11 +1,11 @@
 import {Component, Inject, OnInit, Optional} from '@angular/core';
 import {select, Store} from '@ngrx/store';
-import {AppState} from '../../../../store';
-import {AllTeamsBySeasonRequested} from '../../../../store/team/team.actions';
+import {AppState} from '../../../store';
+import {AllTeamsBySeasonRequested} from '../../../store/team/team.actions';
 import {Observable} from 'rxjs';
-import {Team} from '../../../../shared/models/team.model';
-import {selectAllTeamsFromSeason} from '../../../../store/team/team.selectors';
-import {selectCurrentlySelectedSeason} from '../../../../store/season/season.selectors';
+import {Team} from '../../../shared/models/team.model';
+import {selectAllTeamsFromSeason} from '../../../store/team/team.selectors';
+import {selectCurrentlySelectedSeason} from '../../../store/season/season.selectors';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {EditTeamDialogComponent} from '../edit-team-dialog/edit-team-dialog.component';
 import {AddTeamDialogComponent} from '../add-team-dialog/add-team-dialog.component';
