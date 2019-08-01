@@ -6,9 +6,13 @@ import {HistoryHomeComponent} from './history-home/history-home.component';
 import {HistoryTeamListingComponent} from './history-team-listing/history-team-listing.component';
 import {AppMaterialModule} from '../app-material.module';
 import {SharedModule} from '../shared/shared.module';
+import { HistoryNavComponent } from './history-nav/history-nav.component';
 
 @NgModule({
-    declarations: [HistoryHomeComponent, HistoryTeamListingComponent],
+    declarations: [HistoryHomeComponent, HistoryTeamListingComponent, HistoryNavComponent],
+    exports: [
+        HistoryNavComponent
+    ],
     imports: [
         CommonModule,
         HistoryRoutingModule,

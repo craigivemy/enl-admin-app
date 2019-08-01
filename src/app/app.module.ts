@@ -15,7 +15,6 @@ import {CustomSerializer} from './shared/utils';
 import {EffectsModule} from '@ngrx/effects';
 import {HttpClientModule} from '@angular/common/http';
 import {ClubTeamModule} from './club-team/club-team.module';
-import {MatInputModule, MatOptionModule, MatSelectModule} from '@angular/material';
 import {SeasonEffects} from './store/season/season.effects';
 import {seasonReducer} from './store/season/season.reducer';
 import {MatchModule} from './match/match.module';
@@ -23,11 +22,14 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {UmpireModule} from './umpire/umpire.module';
 import {DivisionSeasonModule} from './division-season/division-season.module';
 import {SharedModule} from './shared/shared.module';
+import { DefaultNavComponent } from './default-nav/default-nav.component';
+import {HistoryModule} from './history/history.module';
 
 @NgModule({
     declarations: [
         AppComponent,
-        HomeComponent
+        HomeComponent,
+        DefaultNavComponent
     ],
     imports: [
         BrowserModule,
@@ -47,7 +49,8 @@ import {SharedModule} from './shared/shared.module';
         }),
         StoreModule.forFeature('seasons', seasonReducer),
         EffectsModule.forRoot([SeasonEffects]),
-        !environment.production ? StoreDevtoolsModule.instrument() : []
+        !environment.production ? StoreDevtoolsModule.instrument() : [],
+        HistoryModule
     ],
     providers: [],
     exports: [
