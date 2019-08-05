@@ -24,12 +24,15 @@ import {DivisionSeasonModule} from './division-season/division-season.module';
 import {SharedModule} from './shared/shared.module';
 import { DefaultNavComponent } from './default-nav/default-nav.component';
 import {HistoryModule} from './history/history.module';
+import { NewSeasonComponent } from './new-season/new-season.component';
+import {MatCheckboxModule} from '@angular/material';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
-        DefaultNavComponent
+        DefaultNavComponent,
+        NewSeasonComponent
     ],
     imports: [
         BrowserModule,
@@ -50,7 +53,8 @@ import {HistoryModule} from './history/history.module';
         StoreModule.forFeature('seasons', seasonReducer),
         EffectsModule.forRoot([SeasonEffects]),
         !environment.production ? StoreDevtoolsModule.instrument() : [],
-        HistoryModule
+        HistoryModule,
+        MatCheckboxModule
     ],
     providers: [],
     exports: [

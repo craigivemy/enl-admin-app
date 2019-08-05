@@ -1,0 +1,35 @@
+<mat-horizontal-stepper #stepper>
+  <mat-step [stepControl]="divisionList">
+<!--    <form [formGroup]="chooseDivisions">-->
+<!--      <ng-template matStepLabel>Choose which teams are part of this season</ng-template>-->
+<!--      <mat-form-field>-->
+<!--        <mat-checkbox *ngFor="let division of divisions$ | async" formControlName="divisions">{{ division.name }}</mat-checkbox>-->
+<!--      </mat-form-field>-->
+<!--      <div>-->
+<!--        <button mat-button matStepperNext>Next</button>-->
+<!--      </div>-->
+<!--    </form>-->
+    <ul><li *ngFor="let division of divisions$ | async">{{ division.name }}</li></ul>
+  </mat-step>
+  <mat-step [stepControl]="teamList">
+<!--    <form [formGroup]="chooseTeams">-->
+<!--      <ng-template matStepLabel>Choose your teams</ng-template>-->
+<!--      <mat-form-field>-->
+<!--        <input matInput placeholder="Address" formControlName="secondCtrl" required>-->
+<!--      </mat-form-field>-->
+<!--      <div>-->
+<!--        <button mat-button matStepperPrevious>Back</button>-->
+<!--        <button mat-button matStepperNext>Next</button>-->
+<!--      </div>-->
+<!--    </form>-->
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+
