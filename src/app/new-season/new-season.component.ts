@@ -6,6 +6,7 @@ import {Division} from '../shared/models/division.model';
 import {Observable} from 'rxjs';
 import {selectAllDivisions} from '../store/division/division.selectors';
 import {AllDivisionsRequested} from '../store/division/division.actions';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-season',
@@ -15,14 +16,15 @@ import {AllDivisionsRequested} from '../store/division/division.actions';
 export class NewSeasonComponent implements OnInit {
   chooseDivisions: FormGroup;
   chooseTeams: FormGroup;
-  divisions$: Observable<Division[]>;
+  divisions: Division[];
   constructor(
       private fb: FormBuilder,
       private store: Store<AppState>
   ) {
     this.chooseDivisions = this.fb.group({
-        chooseDivisions: ['', Validators.required],
-        chooseTeams: ['', Validators.required]
+        // chooseDivisions: ['', Validators.required],
+        divisions: [this.fb.array(this.divisions), Validators.required]
+        // chooseTeams: ['', Validators.required]
     });
 
 
@@ -30,10 +32,10 @@ export class NewSeasonComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new AllDivisionsRequested());
-    this.divisions$ = this.store
+    this.store
         .pipe(
             select(selectAllDivisions)
-        );
+        ).subscribe(divisions => this.divisions = divisions);
   }
 
 }
