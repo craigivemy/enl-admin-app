@@ -1,34 +1,25 @@
-<mat-horizontal-stepper #stepper>
+<mat-horizontal-stepper #newSeasonStepper (animationDone)="loadDataForStep(newSeasonStepper.selectedIndex)">
   <mat-step [stepControl]="divisionList">
-<!--    <form [formGroup]="chooseDivisions">-->
-<!--      <ng-template matStepLabel>Choose which teams are part of this season</ng-template>-->
-<!--      <mat-form-field>-->
-<!--        <mat-checkbox *ngFor="let division of divisions$ | async" formControlName="divisions">{{ division.name }}</mat-checkbox>-->
-<!--      </mat-form-field>-->
-<!--      <div>-->
-<!--        <button mat-button matStepperNext>Next</button>-->
-<!--      </div>-->
-<!--    </form>-->
-
+    <ng-template matStepLabel>Choose divisions</ng-template>
+    <!-- todo - preselect ones that were used in last season -->
+    <div *ngFor="let division of allDivisions">
+      <mat-checkbox (change)="addToSelectedDivisions(division.id)">{{ division.name }}</mat-checkbox>
+    </div>
+    <!-- todo - need add new functionality -->
+    <button [disabled]="!selectedDivisions.length" mat-button matStepperNext>Next</button>
   </mat-step>
   <mat-step [stepControl]="teamList">
-<!--    <form [formGroup]="chooseTeams">-->
-<!--      <ng-template matStepLabel>Choose your teams</ng-template>-->
-<!--      <mat-form-field>-->
-<!--        <input matInput placeholder="Address" formControlName="secondCtrl" required>-->
-<!--      </mat-form-field>-->
-<!--      <div>-->
-<!--        <button mat-button matStepperPrevious>Back</button>-->
-<!--        <button mat-button matStepperNext>Next</button>-->
-<!--      </div>-->
-<!--    </form>-->
+    <ng-template matStepLabel>Choose teams</ng-template>
+    <div *ngFor="let team of allTeams">
+      <mat-checkbox (change)="addToSelectedDivisions(team.id)">{{ team.name }}</mat-checkbox>
+    </div>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     You are now done.
     <div>
       <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button (click)="newSeasonStepper.reset()">Reset</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>

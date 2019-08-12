@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../store';
 import {Division} from '../shared/models/division.model';
-import {Observable} from 'rxjs';
 import {selectAllDivisions} from '../store/division/division.selectors';
 import {AllDivisionsRequested} from '../store/division/division.actions';
-import {map} from 'rxjs/operators';
+import {Team} from '../shared/models/team.model';
+import {MatStepper} from '@angular/material';
+import {selectAllTeams} from '../store/team/team.selectors';
+import {AllTeamsRequested} from '../store/team/team.actions';
 
 @Component({
   selector: 'app-new-season',
@@ -14,20 +16,14 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./new-season.component.css']
 })
 export class NewSeasonComponent implements OnInit {
-  chooseDivisions: FormGroup;
-  chooseTeams: FormGroup;
-  divisions: Division[];
+  selectedDivisions: number[] = [];
+  allDivisions: Division[];
+  allTeams: Team[];
+  @Input() newSeasonStepper: MatStepper;
   constructor(
       private fb: FormBuilder,
       private store: Store<AppState>
   ) {
-    this.chooseDivisions = this.fb.group({
-        // chooseDivisions: ['', Validators.required],
-        divisions: [this.fb.array(this.divisions), Validators.required]
-        // chooseTeams: ['', Validators.required]
-    });
-
-
   }
 
   ngOnInit() {
@@ -35,7 +31,23 @@ export class NewSeasonComponent implements OnInit {
     this.store
         .pipe(
             select(selectAllDivisions)
-        ).subscribe(divisions => this.divisions = divisions);
+        ).subscribe(divisions => this.allDivisions = divisions);
+
+  }
+
+  addToSelectedDivisions(divisionsId: number): void {
+    this.selectedDivisions.push(divisionsId);
+    console.log(this.selectedDivisions);
+  }
+
+  loadDataForStep(index: number) {
+    if (index === 1) {
+      this.store.dispatch(new AllTeamsRequested());
+      this.store
+          .pipe(
+              select(selectAllTeams)
+          ).subscribe(teams => this.allTeams = teams);
+    }
   }
 
 }
