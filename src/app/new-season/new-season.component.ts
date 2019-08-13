@@ -21,6 +21,7 @@ export class NewSeasonComponent implements OnInit {
   allTeams: Team[];
   @Input() newSeasonStepper: MatHorizontalStepper;
   step1Valid = false;
+  // todo - potentially use hidden form control that is required? Change method then adds to formControl array
   constructor(
       private fb: FormBuilder,
       private store: Store<AppState>
