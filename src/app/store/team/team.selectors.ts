@@ -25,3 +25,8 @@ export const selectAllTeamsFromSeason = (seasonId: number) => createSelector(
         return filtered;
     }
 );
+
+export const selectAllTeamsLoaded = createSelector(
+    selectTeamsState,
+    teamsState => teamsState.allTeamsLoaded
+);

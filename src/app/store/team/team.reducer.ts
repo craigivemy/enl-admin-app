@@ -4,12 +4,14 @@ import {TeamActions, TeamActionTypes} from './team.actions';
 
 export interface TeamsState extends EntityState<Team> {
     allTeamsFromSeasonLoaded: boolean;
+    allTeamsLoaded: boolean;
 }
 
 export const adapter: EntityAdapter<Team> = createEntityAdapter<Team>();
 
 export const initialTeamsState: TeamsState = adapter.getInitialState({
-    allTeamsFromSeasonLoaded: false
+    allTeamsFromSeasonLoaded: false,
+    allTeamsLoaded: false
 });
 
 export function teamReducer(state = initialTeamsState, action: TeamActions): TeamsState {

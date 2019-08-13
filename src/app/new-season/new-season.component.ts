@@ -6,7 +6,7 @@ import {Division} from '../shared/models/division.model';
 import {selectAllDivisions} from '../store/division/division.selectors';
 import {AllDivisionsRequested} from '../store/division/division.actions';
 import {Team} from '../shared/models/team.model';
-import {MatStepper} from '@angular/material';
+import {MatHorizontalStepper} from '@angular/material';
 import {selectAllTeams} from '../store/team/team.selectors';
 import {AllTeamsRequested} from '../store/team/team.actions';
 
@@ -19,7 +19,8 @@ export class NewSeasonComponent implements OnInit {
   selectedDivisions: number[] = [];
   allDivisions: Division[];
   allTeams: Team[];
-  @Input() newSeasonStepper: MatStepper;
+  @Input() newSeasonStepper: MatHorizontalStepper;
+  step1Valid = false;
   constructor(
       private fb: FormBuilder,
       private store: Store<AppState>
@@ -49,5 +50,4 @@ export class NewSeasonComponent implements OnInit {
           ).subscribe(teams => this.allTeams = teams);
     }
   }
-
 }

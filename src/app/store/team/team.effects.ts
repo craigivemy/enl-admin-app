@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import {AllTeamsBySeasonLoaded, AllTeamsBySeasonRequested, TeamActionTypes} from './team.actions';
-import {map, mergeMap, switchMap, take} from 'rxjs/operators';
+import {AllTeamsBySeasonLoaded, AllTeamsBySeasonRequested, AllTeamsLoaded, AllTeamsRequested, TeamActionTypes} from './team.actions';
+import {filter, map, mergeMap, switchMap, take, withLatestFrom} from 'rxjs/operators';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../index';
 import {TeamService} from '../../club-team/team.service';
-import {selectAllTeamsFromSeason} from './team.selectors';
+import {selectAllTeamsFromSeason, selectAllTeamsLoaded} from './team.selectors';
 
 @Injectable()
 export class TeamEffects {
@@ -33,5 +33,14 @@ export class TeamEffects {
                         map(teams => new AllTeamsBySeasonLoaded({teams}))
                     );
             })
+        );
+    @Effect()
+    loadAllSeasons$ = this.actions$
+        .pipe(
+            ofType<AllTeamsRequested>(TeamActionTypes.AllTeamsRequested),
+            withLatestFrom(this.store.pipe(select(selectAllTeamsLoaded))),
+            filter(([action, allSeasonLoaded]) => !allSeasonLoaded),
+            mergeMap(() => this.teamsService.getAllTeams()),
+            map(teams => new AllTeamsLoaded({teams}))
         );
 }
