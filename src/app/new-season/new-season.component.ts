@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../store';
 import {Division} from '../shared/models/division.model';
@@ -19,6 +19,7 @@ export class NewSeasonComponent implements OnInit {
   selectedDivisions: number[] = [];
   allDivisions: Division[];
   allTeams: Team[];
+  selectedTest: FormArray;
   @Input() newSeasonStepper: MatHorizontalStepper;
   step1Valid = false;
   // todo - potentially use hidden form control that is required? Change method then adds to formControl array
@@ -26,6 +27,7 @@ export class NewSeasonComponent implements OnInit {
       private fb: FormBuilder,
       private store: Store<AppState>
   ) {
+      this.selectedTest = this.fb.array([]);
   }
 
   ngOnInit() {
@@ -35,11 +37,21 @@ export class NewSeasonComponent implements OnInit {
             select(selectAllDivisions)
         ).subscribe(divisions => this.allDivisions = divisions);
 
+    this.selectedTest.valueChanges.subscribe(
+        (val) => console.log(val)
+    );
   }
 
-  addToSelectedDivisions(divisionsId: number): void {
-    this.selectedDivisions.push(divisionsId);
-    console.log(this.selectedDivisions);
+  addToSelectedDivisions(event, divisionId: number): void {
+    if (event.checked) {
+      this.selectedTest.push(this.fb.control(divisionId));
+    } else {
+      for (let i = 0; i < this.selectedTest.controls.length; i++) {
+        if (this.selectedTest.controls[i].value === divisionId) {
+          this.selectedTest.removeAt(i);
+        }
+      }
+    }
   }
 
   loadDataForStep(index: number) {

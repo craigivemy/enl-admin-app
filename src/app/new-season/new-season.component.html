@@ -3,7 +3,7 @@
     <ng-template matStepLabel>Choose divisions</ng-template>
     <!-- todo - preselect ones that were used in last season -->
     <div *ngFor="let division of allDivisions">
-      <mat-checkbox (change)="addToSelectedDivisions(division.id)">{{ division.name }}</mat-checkbox>
+      <mat-checkbox (change)="addToSelectedDivisions($event, division.id)">{{ division.name }}</mat-checkbox>
     </div>
     <!-- todo - need add new functionality -->
     <button mat-button matStepperNext>Next</button>
