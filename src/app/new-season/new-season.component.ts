@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, Validators} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../store';
 import {Division} from '../shared/models/division.model';
@@ -9,6 +9,7 @@ import {Team} from '../shared/models/team.model';
 import {MatHorizontalStepper} from '@angular/material';
 import {selectAllTeams} from '../store/team/team.selectors';
 import {AllTeamsRequested} from '../store/team/team.actions';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-season',
@@ -16,18 +17,20 @@ import {AllTeamsRequested} from '../store/team/team.actions';
   styleUrls: ['./new-season.component.css']
 })
 export class NewSeasonComponent implements OnInit {
-  selectedDivisions: number[] = [];
   allDivisions: Division[];
   allTeams: Team[];
-  selectedTest: FormArray;
+  divisionsFormArray: FormArray;
+  teamsFormArray: FormArray;
   @Input() newSeasonStepper: MatHorizontalStepper;
   step1Valid = false;
+  step2Valid = false;
   // todo - potentially use hidden form control that is required? Change method then adds to formControl array
   constructor(
       private fb: FormBuilder,
       private store: Store<AppState>
   ) {
-      this.selectedTest = this.fb.array([]);
+      this.divisionsFormArray = this.fb.array([], Validators.minLength(1));
+      this.teamsFormArray = this.fb.array([], Validators.minLength(2));
   }
 
   ngOnInit() {
@@ -37,18 +40,34 @@ export class NewSeasonComponent implements OnInit {
             select(selectAllDivisions)
         ).subscribe(divisions => this.allDivisions = divisions);
 
-    this.selectedTest.valueChanges.subscribe(
-        (val) => console.log(val)
+    // todo - remove tap here
+    this.divisionsFormArray.valueChanges.pipe(tap((val) => console.log(val))).subscribe(
+        val => this.step1Valid = val.length > 1
+    );
+    this.teamsFormArray.valueChanges.pipe(tap((val) => console.log(val))).subscribe(
+        val => this.step2Valid = val.length > 2
     );
   }
 
   addToSelectedDivisions(event, divisionId: number): void {
     if (event.checked) {
-      this.selectedTest.push(this.fb.control(divisionId));
+      this.divisionsFormArray.push(this.fb.control(divisionId));
     } else {
-      for (let i = 0; i < this.selectedTest.controls.length; i++) {
-        if (this.selectedTest.controls[i].value === divisionId) {
-          this.selectedTest.removeAt(i);
+      for (let i = 0; i < this.divisionsFormArray.controls.length; i++) {
+        if (this.divisionsFormArray.controls[i].value === divisionId) {
+          this.divisionsFormArray.removeAt(i);
+        }
+      }
+    }
+  }
+
+  addToSelectedTeams(event, teamId: number): void {
+    if (event.checked) {
+      this.teamsFormArray.push(this.fb.control(teamId));
+    } else {
+      for (let i = 0; i < this.teamsFormArray.controls.length; i++) {
+        if (this.teamsFormArray.controls[i].value === teamId) {
+          this.teamsFormArray.removeAt(i);
         }
       }
     }
