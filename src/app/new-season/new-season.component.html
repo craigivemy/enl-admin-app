@@ -1,17 +1,22 @@
+<div class="container">
 <mat-horizontal-stepper [linear]="true" labelPosition="bottom" #newSeasonStepper (animationDone)="loadDataForStep(newSeasonStepper.selectedIndex)">
   <mat-step [completed]="step1Valid">
     <ng-template matStepLabel>Choose divisions</ng-template>
-    <!-- todo - preselect ones that were used in last season -->
-    <div *ngFor="let division of allDivisions">
-      <mat-checkbox (change)="addToSelectedDivisions($event, division.id)">{{ division.name }}</mat-checkbox>
-    </div>
-    <!-- todo - need add new functionality -->
-    <button mat-raised-button matStepperNext color="primary" [disabled]="!step1Valid">Next</button>
+      <div class="row">
+        <!-- todo - preselect ones that were used in last season -->
+        <div *ngFor="let division of allDivisions" class="col-6">
+          <mat-checkbox (change)="addToSelectedDivisions($event, division.id)">{{ division.name }}</mat-checkbox>
+        </div>
+        <!-- todo - need add new functionality -->
+        <button mat-raised-button matStepperNext color="primary" [disabled]="!step1Valid">Next</button>
+      </div>
   </mat-step>
   <mat-step [completed]="step2Valid">
     <ng-template matStepLabel>Choose teams</ng-template>
-    <div *ngFor="let team of allTeams">
-      <mat-checkbox (change)="addToSelectedTeams($event, team.id)">{{ team.name }}</mat-checkbox>
+      <div class="row">
+        <div *ngFor="let team of allTeams" class="col-4">
+          <mat-checkbox (change)="addToSelectedTeams($event, team.id)">{{ team.name }}</mat-checkbox>
+        </div>
     </div>
     <button mat-raised-button matStepperNext
             color="primary"
@@ -49,4 +54,5 @@
       </div>
     </mat-step>
 </mat-horizontal-stepper>
+</div>
 
