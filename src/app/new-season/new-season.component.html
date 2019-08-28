@@ -1,58 +1,65 @@
 <div class="container">
-<mat-horizontal-stepper [linear]="true" labelPosition="bottom" #newSeasonStepper (animationDone)="loadDataForStep(newSeasonStepper.selectedIndex)">
-  <mat-step [completed]="step1Valid">
-    <ng-template matStepLabel>Choose divisions</ng-template>
-      <div class="row">
-        <!-- todo - preselect ones that were used in last season -->
-        <div *ngFor="let division of allDivisions" class="col-6">
-          <mat-checkbox (change)="addToSelectedDivisions($event, division.id)">{{ division.name }}</mat-checkbox>
-        </div>
-        <!-- todo - need add new functionality -->
-        <button mat-raised-button matStepperNext color="primary" [disabled]="!step1Valid">Next</button>
-      </div>
-  </mat-step>
-  <mat-step [completed]="step2Valid">
-    <ng-template matStepLabel>Choose teams</ng-template>
-      <div class="row">
-        <div *ngFor="let team of allTeams" class="col-4">
-          <mat-checkbox (change)="addToSelectedTeams($event, team.id)">{{ team.name }}</mat-checkbox>
-        </div>
-    </div>
-    <button mat-raised-button matStepperNext
-            color="primary"
-            [disabled]="!step2Valid"
-            class="mr-2">Next
-    </button>
-    <button mat-raised-button matStepperPrevious color="accent">Back</button>
-  </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Put teams in divisions</ng-template>
-      Test
-      <button mat-raised-button matStepperNext
-              color="primary"
-              [disabled]="!step2Valid"
-              class="mr-2">Next
-      </button>
-      <button mat-raised-button matStepperPrevious color="accent">Back</button>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Next step</ng-template>
-      <button mat-raised-button matStepperNext
-              color="primary"
-              [disabled]="!step2Valid"
-              class="mr-2">Next
-      </button>
-      <button mat-raised-button matStepperPrevious color="accent">Back</button>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Confirm</ng-template>
-      You are now done.
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <!-- todo - reset functinality might be useful but would need to manually clear formArrays -->
-<!--        <button mat-button (click)="newSeasonStepper.reset()">Reset</button>-->
-      </div>
-    </mat-step>
-</mat-horizontal-stepper>
+    <mat-horizontal-stepper [linear]="true" labelPosition="bottom" #newSeasonStepper (animationDone)="loadDataForStep(newSeasonStepper.selectedIndex)">
+        <mat-step [completed]="step1Valid">
+            <ng-template matStepLabel>Choose divisions</ng-template>
+            <div class="row">
+                <!-- todo - preselect ones that were used in last season -->
+                <div *ngFor="let division of allDivisions" class="col-6">
+                    <mat-checkbox (change)="addToSelectedDivisions($event, division)">{{ division.name }}</mat-checkbox>
+                </div>
+                <!-- todo - need add new functionality -->
+                <button mat-raised-button matStepperNext color="primary" [disabled]="!step1Valid">Next</button>
+            </div>
+        </mat-step>
+        <mat-step [completed]="step2Valid">
+            <ng-template matStepLabel>Choose teams</ng-template>
+            <div class="row">
+<!--                <div *ngFor="let team of allTeams" class="col-4">-->
+<!--                    <mat-checkbox (change)="addToSelectedTeams($event, team.id)">{{ team.name }}</mat-checkbox>-->
+<!--                </div>-->
+                <mat-tree>
+                    <mat-tree-node *ngFor="let team of allTeams" class="col-4">
+                        <mat-tree-node *ngFor="let division of selectedDivisions">
+                            <mat-checkbox (change)="addToSelectedTeams($event, team.id, division.id)">{{ division.name }}</mat-checkbox>
+                        </mat-tree-node>
+                    </mat-tree-node>
+                </mat-tree>
+            </div>
+            <button mat-raised-button matStepperNext
+                    color="primary"
+                    [disabled]="!step2Valid"
+                    class="mr-2">Next
+            </button>
+            <button mat-raised-button matStepperPrevious color="accent">Back</button>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Put teams in divisions</ng-template>
+            Test
+            <button mat-raised-button matStepperNext
+                    color="primary"
+                    [disabled]="!step2Valid"
+                    class="mr-2">Next
+            </button>
+            <button mat-raised-button matStepperPrevious color="accent">Back</button>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Next step</ng-template>
+            <button mat-raised-button matStepperNext
+                    color="primary"
+                    [disabled]="!step2Valid"
+                    class="mr-2">Next
+            </button>
+            <button mat-raised-button matStepperPrevious color="accent">Back</button>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Confirm</ng-template>
+            You are now done.
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <!-- todo - reset functinality might be useful but would need to manually clear formArrays -->
+                <!--        <button mat-button (click)="newSeasonStepper.reset()">Reset</button>-->
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
 </div>
 

@@ -18,6 +18,7 @@ import {tap} from 'rxjs/operators';
 })
 export class NewSeasonComponent implements OnInit {
   allDivisions: Division[];
+  selectedDivisions: Division[] = [];
   allTeams: Team[];
   divisionsFormArray: FormArray;
   teamsFormArray: FormArray;
@@ -41,27 +42,35 @@ export class NewSeasonComponent implements OnInit {
         ).subscribe(divisions => this.allDivisions = divisions);
 
     // todo - remove tap here
-    this.divisionsFormArray.valueChanges.pipe(tap((val) => console.log(val))).subscribe(
+    this.divisionsFormArray.valueChanges.pipe(tap((val) => console.log(''))).subscribe(
         val => this.step1Valid = val.length > 1
     );
-    this.teamsFormArray.valueChanges.pipe(tap((val) => console.log(val))).subscribe(
+    this.teamsFormArray.valueChanges.pipe(tap((val) => console.log(''))).subscribe(
         val => this.step2Valid = val.length > 2
     );
   }
 
-  addToSelectedDivisions(event, divisionId: number): void {
+  addToSelectedDivisions(event, division: Division): void {
     if (event.checked) {
-      this.divisionsFormArray.push(this.fb.control(divisionId));
+      this.divisionsFormArray.push(this.fb.control(division));
+      this.selectedDivisions.push(division);
+      console.log(this.selectedDivisions);
     } else {
       for (let i = 0; i < this.divisionsFormArray.controls.length; i++) {
-        if (this.divisionsFormArray.controls[i].value === divisionId) {
+        if (this.divisionsFormArray.controls[i].value === division.id) {
           this.divisionsFormArray.removeAt(i);
         }
+      }
+      for (let i = 0; i < this.selectedDivisions.length; i++) {
+        if (this.selectedDivisions[i].id === division.id) {
+          this.selectedDivisions.splice(i, 1);
+        }
+        console.log(this.selectedDivisions);
       }
     }
   }
 
-  addToSelectedTeams(event, teamId: number): void {
+  addToSelectedTeams(event, teamId: number, divisionId: number): void {
     if (event.checked) {
       this.teamsFormArray.push(this.fb.control(teamId));
     } else {
