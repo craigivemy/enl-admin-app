@@ -14,16 +14,9 @@
         <mat-step [completed]="step2Valid">
             <ng-template matStepLabel>Choose teams</ng-template>
             <div class="row">
-<!--                <div *ngFor="let team of allTeams" class="col-4">-->
-<!--                    <mat-checkbox (change)="addToSelectedTeams($event, team.id)">{{ team.name }}</mat-checkbox>-->
-<!--                </div>-->
-                <mat-tree>
-                    <mat-tree-node *ngFor="let team of allTeams" class="col-4">
-                        <mat-tree-node *ngFor="let division of selectedDivisions">
-                            <mat-checkbox (change)="addToSelectedTeams($event, team.id, division.id)">{{ division.name }}</mat-checkbox>
-                        </mat-tree-node>
-                    </mat-tree-node>
-                </mat-tree>
+                <div *ngFor="let team of allTeams" class="col-4">
+                    <mat-checkbox (change)="addToSelectedTeams($event,team)">{{ team.name }}</mat-checkbox>
+                </div>
             </div>
             <button mat-raised-button matStepperNext
                     color="primary"
@@ -34,26 +27,32 @@
         </mat-step>
         <mat-step>
             <ng-template matStepLabel>Put teams in divisions</ng-template>
-            Test
+            <div class="row">
+                <mat-card *ngFor="let team of selectedTeams" class="col-4 mb-5">
+                    <mat-card-title>{{ team.name }}</mat-card-title>
+                    <mat-card-content>
+                        <mat-form-field>
+                            <mat-label>Select Division</mat-label>
+                            <mat-select (selectionChange)="addSelectedTeamsToDivisions($event, team)">
+                                <mat-option *ngFor="let division of selectedDivisions" [value]="division" >{{ division.name }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <!-- todo - need to ensure all teams have a division set, eventually this all needs to have save option so be unfinished but saved -->
             <button mat-raised-button matStepperNext
                     color="primary"
-                    [disabled]="!step2Valid"
-                    class="mr-2">Next
-            </button>
-            <button mat-raised-button matStepperPrevious color="accent">Back</button>
-        </mat-step>
-        <mat-step>
-            <ng-template matStepLabel>Next step</ng-template>
-            <button mat-raised-button matStepperNext
-                    color="primary"
-                    [disabled]="!step2Valid"
+                    [disabled]="!step3Valid"
                     class="mr-2">Next
             </button>
             <button mat-raised-button matStepperPrevious color="accent">Back</button>
         </mat-step>
         <mat-step>
             <ng-template matStepLabel>Confirm</ng-template>
-            You are now done.
+            Do you wish to activate this season now?
+            <button color="primary" mat-raised-button>Yes</button>
+            <button color="accent" mat-raised-button>No</button>
             <div>
                 <button mat-button matStepperPrevious>Back</button>
                 <!-- todo - reset functinality might be useful but would need to manually clear formArrays -->
