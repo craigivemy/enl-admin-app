@@ -1,9 +1,9 @@
 export interface Season {
-    id: number;
+    id?: number;
     name: string;
-    startDate: string;
-    endDate: string;
+    startDate?: string;
+    endDate?: string;
     rounds: number;
-    current: boolean;
-    deleted: boolean; // todo - add this to api
+    current: number;
+    deleted?: boolean; // todo - add this to api
 }

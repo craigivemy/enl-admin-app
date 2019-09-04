@@ -11,7 +11,7 @@ export const adapter: EntityAdapter<Season> = createEntityAdapter<Season>();
 
 export const initialSeasonsState: SeasonsState = adapter.getInitialState({
   allSeasonsLoaded: false,
-  currentlySelectedSeasonId: 2
+  currentlySelectedSeasonId: 2 // todo - this shouldn't be set here
 
 });
 
@@ -20,10 +20,10 @@ export function seasonReducer(
   action: SeasonActions
 ): SeasonsState {
   switch (action.type) {
-    // case SeasonActionTypes.AddSeason: {
-    //   return adapter.addOne(action.payload.division-season, state);
-    // }
-    //
+    case SeasonActionTypes.AddSeason: {
+      return adapter.addOne(action.payload.season, state);
+    }
+
     // case SeasonActionTypes.UpsertSeason: {
     //   return adapter.upsertOne(action.payload.division-season, state);
     // }

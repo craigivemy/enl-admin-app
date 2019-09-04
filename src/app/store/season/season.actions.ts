@@ -23,7 +23,6 @@ export class AllSeasonsRequested implements Action {
 
 export class AllSeasonsLoaded implements Action {
     readonly type = SeasonActionTypes.AllSeasonsLoaded;
-
     constructor(public payload: { seasons: Season[] }) {}
 }
 

@@ -18,7 +18,7 @@ export const selectCurrentSeasonId = createSelector(
     selectAllSeasons,
     allSeasons => {
             const currentSeason = allSeasons.filter(
-                season => season.current === true
+                season => season.current === 1
             );
             return currentSeason[0] ? currentSeason[0].id : 0;
     }

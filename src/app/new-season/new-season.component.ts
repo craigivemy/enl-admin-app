@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../store';
 import {Division} from '../shared/models/division.model';
@@ -12,6 +12,9 @@ import {AllTeamsRequested} from '../store/team/team.actions';
 import {tap} from 'rxjs/operators';
 import {TeamService} from '../club-team/team.service';
 import {DivisionService} from '../division-season/division.service';
+import {AddSeason} from '../store/season/season.actions';
+import {Season} from '../shared/models/season.model';
+import {SeasonService} from '../division-season/season.service';
 
 @Component({
   selector: 'app-new-season',
@@ -24,19 +27,26 @@ export class NewSeasonComponent implements OnInit {
   allTeams: Team[];
   selectedTeams: Team[] = [];
   teamsAssignedToDivisions: any[] = [];
+  basicSeasonInfo: FormGroup;
   divisionsFormArray: FormArray;
   teamsFormArray: FormArray;
   @Input() newSeasonStepper: MatHorizontalStepper;
   step1Valid = false;
   step2Valid = false;
   step3Valid = false;
+  step4Valid = false;
 
   constructor(
       private fb: FormBuilder,
       private store: Store<AppState>,
       private teamService: TeamService,
-      private divisionService: DivisionService
+      private divisionService: DivisionService,
+      private seasonService: SeasonService
   ) {
+      this.basicSeasonInfo = this.fb.group({
+        name: ['', Validators.required],
+        numberOfRounds: ['', Validators.required]
+      });
       this.divisionsFormArray = this.fb.array([], Validators.minLength(1));
       this.teamsFormArray = this.fb.array([], Validators.minLength(2));
   }
@@ -47,10 +57,10 @@ export class NewSeasonComponent implements OnInit {
     );
 
     this.divisionsFormArray.valueChanges.pipe().subscribe(
-        val => this.step1Valid = val.length > 1
+        val => this.step2Valid = val.length > 1
     );
     this.teamsFormArray.valueChanges.pipe().subscribe(
-        val => this.step2Valid = val.length > 2
+        val => this.step3Valid = val.length > 2
     );
   }
 
@@ -114,11 +124,18 @@ export class NewSeasonComponent implements OnInit {
         }
     );
     if (this.selectedTeams.length === this.teamsAssignedToDivisions.length) {
-      this.step3Valid = true;
+      this.step4Valid = true;
     }
   }
 
-  // save method - include value for pending but not current
-
-
+  saveSeason(activateNow: number) {
+    const newSeason: Season = {
+      name: this.basicSeasonInfo.controls.name.value,
+      rounds: this.basicSeasonInfo.controls.numberOfRounds.value,
+      current: activateNow
+    };
+    this.seasonService.addSeason(newSeason).subscribe(
+      season => this.store.dispatch(new AddSeason({season}))
+    );
+  }
 }
