@@ -95,6 +95,7 @@ export class NewSeasonComponent implements OnInit {
   }
 
   loadDataForStep(index: number) {
+    // todo need to check if there is a 'pending' season - perhaps in ngOnit and just load this data to start with?
     if (index === 1) {
       this.teamService.getAllTeams().subscribe(
           teams => this.allTeams = teams
@@ -116,4 +117,8 @@ export class NewSeasonComponent implements OnInit {
       this.step3Valid = true;
     }
   }
+
+  // save method - include value for pending but not current
+
+
 }
