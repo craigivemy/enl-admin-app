@@ -1,3 +1,5 @@
+import {Division} from './division.model';
+
 export interface Season {
     id?: number;
     name: string;
@@ -5,5 +7,6 @@ export interface Season {
     endDate?: string;
     rounds: number;
     current: number;
+    divisions?: Division[];
     deleted?: boolean; // todo - add this to api
 }

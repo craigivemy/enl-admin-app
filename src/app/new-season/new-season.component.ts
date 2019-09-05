@@ -132,7 +132,8 @@ export class NewSeasonComponent implements OnInit {
     const newSeason: Season = {
       name: this.basicSeasonInfo.controls.name.value,
       rounds: this.basicSeasonInfo.controls.numberOfRounds.value,
-      current: activateNow
+      current: activateNow,
+      divisions: this.selectedDivisions
     };
     this.seasonService.addSeason(newSeason).subscribe(
       season => this.store.dispatch(new AddSeason({season}))
