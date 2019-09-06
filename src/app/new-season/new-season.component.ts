@@ -3,18 +3,16 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angul
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../store';
 import {Division} from '../shared/models/division.model';
-import {selectAllDivisions} from '../store/division/division.selectors';
-import {AllDivisionsRequested} from '../store/division/division.actions';
 import {Team} from '../shared/models/team.model';
 import {MatHorizontalStepper} from '@angular/material';
-import {selectAllTeams} from '../store/team/team.selectors';
-import {AllTeamsRequested} from '../store/team/team.actions';
-import {tap} from 'rxjs/operators';
 import {TeamService} from '../club-team/team.service';
 import {DivisionService} from '../division-season/division.service';
 import {AddSeason} from '../store/season/season.actions';
 import {Season} from '../shared/models/season.model';
 import {SeasonService} from '../division-season/season.service';
+import {selectPendingSeason} from '../store/season/season.selectors';
+import {Observable} from 'rxjs';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-season',
@@ -22,6 +20,7 @@ import {SeasonService} from '../division-season/season.service';
   styleUrls: ['./new-season.component.css']
 })
 export class NewSeasonComponent implements OnInit {
+  pendingSeason: Observable<Season[]>;
   allDivisions: Division[];
   selectedDivisions: Division[] = [];
   allTeams: Team[];
@@ -31,7 +30,6 @@ export class NewSeasonComponent implements OnInit {
   divisionsFormArray: FormArray;
   teamsFormArray: FormArray;
   @Input() newSeasonStepper: MatHorizontalStepper;
-  step1Valid = false;
   step2Valid = false;
   step3Valid = false;
   step4Valid = false;
@@ -52,6 +50,15 @@ export class NewSeasonComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.pendingSeason = this.store
+        .pipe(
+            select(selectPendingSeason),
+            take(1)
+        );
+
+
+
     this.divisionService.getAllDivisions().subscribe(
         divisions => this.allDivisions = divisions
     );
@@ -127,16 +134,19 @@ export class NewSeasonComponent implements OnInit {
       this.step4Valid = true;
     }
   }
-
   saveSeason(activateNow: number) {
     const newSeason: Season = {
       name: this.basicSeasonInfo.controls.name.value,
       rounds: this.basicSeasonInfo.controls.numberOfRounds.value,
       current: activateNow,
-      divisions: this.selectedDivisions
+      divisions: this.selectedDivisions,
+      teams: this.selectedTeams
     };
     this.seasonService.addSeason(newSeason).subscribe(
       season => this.store.dispatch(new AddSeason({season}))
     );
+  }
+  updateSeason() {
+
   }
 }

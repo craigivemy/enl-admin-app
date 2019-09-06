@@ -35,4 +35,9 @@ export const selectIfSelectedSeasonCurrentSeason = createSelector(
     (currentlySelected, current) => currentlySelected === current
 );
 
+export const selectPendingSeason = createSelector(
+    selectAllSeasons,
+    allSeasons => allSeasons.filter(season => season.current === 2)
+);
+
 
